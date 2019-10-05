@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2620424052475767969}
   - component: {fileID: 1239670630877820095}
   - component: {fileID: 3444979083470558130}
+  - component: {fileID: 3433440693658912407}
   m_Layer: 0
   m_Name: QuarkEnemy
   m_TagString: Untagged
@@ -105,6 +106,8 @@ MonoBehaviour:
     alive: 1
   movementProperties:
     speed: 270
+  evolutionProperties:
+    initialEvolution: 0
 --- !u!114 &4449363661882118051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,5 +204,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ebb844a7e9b6ce44b3c6600c7704426, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3433440693658912407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4449363661882118079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0dfb6318087f94298b93b5c02255df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

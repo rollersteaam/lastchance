@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5729916199699632317}
   m_Layer: 0
   m_Name: EvolutionManager
-  m_TagString: Untagged
+  m_TagString: EvolutionLibrary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,16 +43,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e1e0fef8fb95d34483c7f7b332b405f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleEvolutions:
-  - type: 0
-    cameraZ: -10
-    colliderRadius: 0.45
-    sprite: {fileID: 21300000, guid: 18b804a6abfaf75418a6f2c32b66d15c, type: 3}
-    mass: 0.5
-    damageMultiplier: 0
-  - type: 1
-    cameraZ: -20
-    colliderRadius: 0.95
-    sprite: {fileID: 21300000, guid: 6f12a06b210394b4ea10e15a2b440c7c, type: 3}
-    mass: 1
-    damageMultiplier: 0
+  evolutions:
+    forceEvolution:
+      type: 0
+      cameraZ: -10
+      colliderRadius: 0.468324
+      sprite: {fileID: 21300000, guid: 18b804a6abfaf75418a6f2c32b66d15c, type: 3}
+      mass: 0.5
+      damageMultiplier: 0.5
+    quarkEvolution:
+      type: 1
+      cameraZ: -20
+      colliderRadius: 0.936648
+      sprite: {fileID: 21300000, guid: 6f12a06b210394b4ea10e15a2b440c7c, type: 3}
+      mass: 1
+      damageMultiplier: 1
+    particleEvolution:
+      type: 1
+      cameraZ: -20
+      colliderRadius: 0.936648
+      sprite: {fileID: 0}
+      mass: 0
+      damageMultiplier: 1
+    atomEvolution:
+      type: 1
+      cameraZ: -20
+      colliderRadius: 0.936648
+      sprite: {fileID: 0}
+      mass: 0
+      damageMultiplier: 1
+    compoundEvolution:
+      type: 1
+      cameraZ: -20
+      colliderRadius: 0.936648
+      sprite: {fileID: 0}
+      mass: 0
+      damageMultiplier: 1
+    bacteriaEvolution:
+      type: 1
+      cameraZ: -20
+      colliderRadius: 0.936648
+      sprite: {fileID: 0}
+      mass: 0
+      damageMultiplier: 1
+    insectEvolution:
+      type: 1
+      cameraZ: -20
+      colliderRadius: 0.936648
+      sprite: {fileID: 0}
+      mass: 0
+      damageMultiplier: 1
+    creatureEvolution:
+      type: 1
+      cameraZ: -20
+      colliderRadius: 0.936648
+      sprite: {fileID: 0}
+      mass: 0
+      damageMultiplier: 1
+    animalEvolution:
+      type: 1
+      cameraZ: -20
+      colliderRadius: 0.936648
+      sprite: {fileID: 0}
+      mass: 0
+      damageMultiplier: 1
