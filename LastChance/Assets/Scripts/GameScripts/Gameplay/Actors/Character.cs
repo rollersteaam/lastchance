@@ -24,6 +24,11 @@ public class EvolutionProperties {
     public Evolution CurrentEvolution { get; set; }
 }
 
+[System.Serializable]
+public class CombatProperties {
+    public GameObject weapon;
+}
+
 /// <summary>
 /// Character model. The stats of a character.
 /// </summary>
@@ -32,4 +37,5 @@ public class Character : MonoBehaviour
     public HealthProperties healthProperties;
     public MovementProperties movementProperties;
     public EvolutionProperties evolutionProperties;
+    public CombatProperties combatProperties;
 }

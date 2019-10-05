@@ -42,6 +42,8 @@ public class EvolvingBody : MonoBehaviour
     /// <param name="other">The Collision2D data associated with this collision.</param>
     void OnCollisionEnter2D(Collision2D other)
     {
+        if (!IsPlayer()) return;
+
         Character otherChar = other.gameObject.GetComponent<Character>();
 
         if (otherChar == null) return;
@@ -53,12 +55,7 @@ public class EvolvingBody : MonoBehaviour
     {
         Evolution evolution = library.GetEvolution(evolutionType);
 
-        var camPos = Camera.main.transform.position;
-        Camera.main.transform.position = new Vector3(
-            camPos.x,
-            camPos.y,
-            evolution.cameraZ
-        );
+        SetCameraPosition(evolution.cameraZ);
         col.radius = evolution.colliderRadius;
         rend.sprite = evolution.sprite;
         rb.mass = evolution.mass;
@@ -67,6 +64,26 @@ public class EvolvingBody : MonoBehaviour
         character.movementProperties.speed = evolution.CalculateMaximumSpeed();
 
         character.evolutionProperties.CurrentEvolution = evolution;
+    }
+
+    /// <summary>
+    /// Changes the camera's Z coordinate. Only changes if character is a
+    /// player.
+    /// </summary>
+    /// <param name="newZ"></param>
+    void SetCameraPosition(float newZ) {
+        if (!IsPlayer()) return;
+
+        var camPos = Camera.main.transform.position;
+        Camera.main.transform.position = new Vector3(
+            camPos.x,
+            camPos.y,
+            newZ
+        );
+    }
+
+    bool IsPlayer() {
+        return gameObject.tag == "Player";
     }
 
     /// <summary>
@@ -90,7 +107,6 @@ public class EvolvingBody : MonoBehaviour
             .CurrentEvolution
             .type;
         bool invalidEvolution = targetEvolution != currentEvolution;
-        Debug.Log("You're not suitable to evolve from this.");
         if (invalidEvolution) return;
 
         Destroy(target.gameObject);

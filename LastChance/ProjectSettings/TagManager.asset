@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - EvolutionLibrary
+  - DynamicObjects
+  - Armory
   layers:
   - Default
   - TransparentFX

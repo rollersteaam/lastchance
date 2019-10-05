@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,10 +8,21 @@ using UnityEngine;
 /// </summary>
 public class CharacterCombat : MonoBehaviour, IDamageable
 {
+    Armory armory;
     Character character;
+
+    public event EventHandler OnDeath;
 
     void Start() {
         character = GetComponent<Character>();
+
+        armory = GameObject.FindWithTag("Armory").GetComponent<Armory>();
+        character.combatProperties.weapon = Instantiate(
+            armory.weapons.sword,
+            transform.position,
+            Quaternion.identity,
+            transform
+        );
     }
 
     public void Damage(GameObject attacker, int amount)
@@ -43,5 +55,6 @@ public class CharacterCombat : MonoBehaviour, IDamageable
     /// </summary>
     void Kill() {
         character.healthProperties.alive = false;
+        OnDeath?.Invoke(this, EventArgs.Empty);
     }
 }
