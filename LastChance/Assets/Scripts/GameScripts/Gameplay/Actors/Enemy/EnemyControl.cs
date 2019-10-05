@@ -12,19 +12,23 @@ using UnityEngine;
 /// </summary>
 public class EnemyControl : MonoBehaviour
 {
-    Transform player;
+    Character player;
+    Character character;
     IMoveable moveable;
     IEnemyAttackJudge attackJudge;
     IAttacker attacker;
 
     void Start() {
-        player = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindWithTag("Player").GetComponent<Character>();
+        character = GetComponent<Character>();
         moveable = GetComponent<IMoveable>();
         attackJudge = GetComponent<IEnemyAttackJudge>();
         attacker = GetComponent<IAttacker>();
     }
 
     void FixedUpdate() {
+        if (!character.healthProperties.alive) return;
+
         EvaluatePosition();
     }
 
@@ -33,7 +37,7 @@ public class EnemyControl : MonoBehaviour
     /// attack or not.
     /// </summary>
     void EvaluatePosition() {
-        Vector2 difference = player.position - transform.position;
+        Vector2 difference = player.transform.position - transform.position;
 
         if (attackJudge.ShouldAttack(difference.magnitude)) {
             attacker.Attack();

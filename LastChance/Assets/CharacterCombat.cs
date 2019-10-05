@@ -1,0 +1,31 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// Controls what happens to a character in combat situations.
+/// </summary>
+public class CharacterCombat : MonoBehaviour, IDamageable
+{
+    Character character;
+
+    void Start() {
+        character = GetComponent<Character>();
+    }
+
+    public void Damage(int amount)
+    {
+        character.healthProperties.health -= amount;
+
+        if (character.healthProperties.health <= 0) {
+            character.healthProperties.health = 0;
+        }
+    }
+
+    /// <summary>
+    /// Kills the character.
+    /// </summary>
+    void Kill() {
+        character.healthProperties.alive = false;
+    }
+}

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Binds control input to character modules.
+/// Binds control input to player character modules.
 /// </summary>
-public class CharacterControl : MonoBehaviour
+public class PlayerControl : MonoBehaviour
 {
     IMoveable moveable;
     ICharacterAnimator animator;
