@@ -11,7 +11,7 @@ public class EnemyCombat : MonoBehaviour, IEnemyAttackJudge, IAttacker
     /// How far an enemy can attack.
     /// </summary>
     [SerializeField]
-    float attackDistance;
+    float attackDistance = 3;
     CharacterAnimator animator;
     bool canAttack = true;
 

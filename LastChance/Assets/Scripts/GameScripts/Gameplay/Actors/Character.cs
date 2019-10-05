@@ -18,6 +18,11 @@ public class HealthProperties {
     public bool alive = true;
 }
 
+[System.Serializable]
+public class EvolutionProperties {
+    public Evolution currentEvolution;
+}
+
 /// <summary>
 /// Character model. The stats of a character.
 /// </summary>
@@ -25,4 +30,5 @@ public class Character : MonoBehaviour
 {
     public HealthProperties healthProperties;
     public MovementProperties movementProperties;
+    public EvolutionProperties evolutionProperties;
 }
