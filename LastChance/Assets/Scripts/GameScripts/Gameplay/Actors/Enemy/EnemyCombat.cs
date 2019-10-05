@@ -27,12 +27,17 @@ public class EnemyCombat : MonoBehaviour, IEnemyAttackJudge, IAttacker
     /// <summary>
     /// Makes the character attack.
     /// </summary>
-    public void Attack() {
+    public void Attack()
+    {
         if (!canAttack) return;
 
         animator.Attack();
+
         canAttack = false;
-        StartCoroutine(AttackDelay());
+        Chrono.Instance.After(0.5f, () =>
+        {
+            canAttack = true;
+        });
     }
 
     /// <summary>
@@ -40,21 +45,8 @@ public class EnemyCombat : MonoBehaviour, IEnemyAttackJudge, IAttacker
     /// </summary>
     /// <param name="distance">Distance from an enemy.</param>
     /// <returns></returns>
-    public bool ShouldAttack(float distance) {
-        return distance <= attackDistance;
-    }
-
-    private IEnumerator AttackDelay()
+    public bool ShouldAttack(float distance)
     {
-        float duration = 0.5f;
-
-        float normalizedTime = 0;
-        while(normalizedTime <= 1f)
-        {
-            normalizedTime += Time.deltaTime / duration;
-            yield return null;
-        }
-
-        canAttack = true;
+        return distance <= attackDistance;
     }
 }

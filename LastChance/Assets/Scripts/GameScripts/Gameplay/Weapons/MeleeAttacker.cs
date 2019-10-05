@@ -8,8 +8,9 @@ using UnityEngine;
 /// </summary>
 public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
 {
-    [SerializeField]
-    int weaponDamage = 10;
+    [SerializeField] int weaponDamage = 10;
+    [SerializeField] float attackDelay;
+    bool canAttack;
     Animator animator;
     GameObject wielder;
     AttackTrigger attackTrigger;
@@ -32,8 +33,18 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
         attackHit.Damageable.Damage(wielder, weaponDamage);
     }
 
-    public void Attack()
+    public bool Attack()
     {
+        if (!canAttack)
+            return false;
+        
         animator.Play("Attack", -1, 0f);
+
+        canAttack = false;
+        Chrono.Instance.After(attackDelay, () => {
+            canAttack = true;
+        });
+
+        return true;
     }
 }

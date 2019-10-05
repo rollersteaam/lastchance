@@ -7,5 +7,5 @@ using UnityEngine;
 /// </summary>
 public interface IWeaponAttacker
 {
-    void Attack();
+    bool Attack();
 }

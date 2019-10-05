@@ -8,9 +8,33 @@ using UnityEngine;
 public class RangedAttacker : MonoBehaviour, IWeaponAttacker
 {
     [SerializeField] GameObject projectile;
+    [SerializeField] float attackDelay;
+    bool canAttack;
     List<GameObject> projectiles;
+    Transform dynamicObjects;
 
-    public void Attack() {
-        
+    void Start()
+    {
+        dynamicObjects = GameObject.FindWithTag("DynamicObjects").transform;
+    }
+
+    public bool Attack() {
+        if (!canAttack)
+            return false;
+
+        projectiles.Add(
+            Instantiate(
+                projectile,
+                transform.position,
+                Quaternion.identity,
+                dynamicObjects
+            )
+        );
+        canAttack = false;
+        Chrono.Instance.After(attackDelay, () => {
+            canAttack = true;
+        });
+
+        return true;
     }
 }
