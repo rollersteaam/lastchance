@@ -21,6 +21,8 @@ public class AttackTrigger : MonoBehaviour
     /// <param name="other">The Collision2D data associated with this collision.</param>
     void OnCollisionStay2D(Collision2D other)
     {
+        Debug.Log("HIT!");
+
         var damageable = other.gameObject.GetComponent<IDamageable>();
 
         if (damageable == null) return;

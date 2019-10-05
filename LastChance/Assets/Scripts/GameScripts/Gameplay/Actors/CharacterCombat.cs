@@ -13,8 +13,11 @@ public class CharacterCombat : MonoBehaviour, IDamageable
         character = GetComponent<Character>();
     }
 
-    public void Damage(int amount)
+    public void Damage(GameObject attacker, int amount)
     {
+        // No hurting yourself!!!
+        if (attacker == gameObject) return;
+
         character.healthProperties.health -= amount;
 
         if (character.healthProperties.health <= 0) {

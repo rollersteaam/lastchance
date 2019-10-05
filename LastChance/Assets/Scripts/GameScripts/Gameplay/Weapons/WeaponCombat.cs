@@ -10,17 +10,18 @@ public class WeaponCombat : MonoBehaviour
 {
     [SerializeField]
     int weaponDamage = 10;
-
+    GameObject wielder;
     AttackTrigger attackTrigger;
 
     void Start()
     {
+        wielder = transform.parent.gameObject;
         attackTrigger = GetComponentInChildren<AttackTrigger>();
 
         attackTrigger.OnAttackHit += OnAttackHit;
     }
 
     void OnAttackHit(object sender, AttackHitEventArgs attackHit) {
-        attackHit.Damageable.Damage(weaponDamage);
+        attackHit.Damageable.Damage(wielder, weaponDamage);
     }
 }
