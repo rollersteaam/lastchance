@@ -20,7 +20,8 @@ public class HealthProperties {
 
 [System.Serializable]
 public class EvolutionProperties {
-    public Evolution currentEvolution;
+    public EvolutionType initialEvolution;
+    public Evolution CurrentEvolution { get; set; }
 }
 
 /// <summary>

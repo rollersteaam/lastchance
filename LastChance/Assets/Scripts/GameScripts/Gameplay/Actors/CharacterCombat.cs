@@ -25,7 +25,7 @@ public class CharacterCombat : MonoBehaviour, IDamageable
         if (atkChar != null) {
             var damageMult = atkChar
                 .evolutionProperties
-                .currentEvolution
+                .CurrentEvolution
                 .damageMultiplier;
             amount = Mathf.RoundToInt(amount * damageMult);
         }
