@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Binds input to character modules.
+/// Binds control input to character modules.
 /// </summary>
 public class CharacterControl : MonoBehaviour
 {
@@ -20,7 +20,18 @@ public class CharacterControl : MonoBehaviour
     void FixedUpdate()
     {
         ProcessMovementInput();
+        ProcessRotationInput();
         ProcessAttackInput();
+    }
+
+    /// <summary>
+    /// Rotates the object based on mouse pointer location.
+    /// </summary>
+    void ProcessRotationInput()
+    {
+        // TODO: Could be wrong, figure this out
+        var worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        moveable.TurnTo(worldPos);
     }
 
     /// <summary>

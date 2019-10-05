@@ -22,4 +22,10 @@ public class CharacterMovement : MonoBehaviour, IMoveable
             direction.normalized * character.movementProperties.speed
         );
     }
+
+    public void TurnTo(Vector2 target)
+    {
+        transform.rotation.SetLookRotation(target);
+        // TODO: Alternatively set Euler rotation using trigonometry to vector target
+    }
 }

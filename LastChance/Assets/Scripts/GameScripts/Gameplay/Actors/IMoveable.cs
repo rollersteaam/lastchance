@@ -19,4 +19,9 @@ public interface IMoveable
     /// Normalized direction vector. Magnitude is ignored.
     /// </param>
     void Move(Vector2 direction);
+    /// <summary>
+    /// Turns character to target vector.
+    /// </summary>
+    /// <param name="target"></param>
+    void TurnTo(Vector2 target);
 }

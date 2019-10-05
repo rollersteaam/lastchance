@@ -15,6 +15,6 @@ public class WeaponAnimator : MonoBehaviour, IWeaponAnimator
 
     public void Attack()
     {
-        animator.Play("Attack");
+        animator.Play("Attack", -1, 0f);
     }
 }
