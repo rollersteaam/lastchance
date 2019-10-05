@@ -8,6 +8,7 @@ using UnityEngine;
 public class RangedAttacker : MonoBehaviour, IWeaponAttacker
 {
     [SerializeField] GameObject projectile;
+    [SerializeField] int attackDamage;
     [SerializeField] float attackDelay;
     [SerializeField] float attackPermanence;
     bool canAttack;
@@ -19,29 +20,52 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
         dynamicObjects = GameObject.FindWithTag("DynamicObjects").transform;
     }
 
-    public bool Attack() {
+    public bool Attack()
+    {
         if (!canAttack)
             return false;
 
-        // Manage lifetime of projectile
         var proj = Instantiate(
             projectile,
             transform.position,
             Quaternion.identity,
             dynamicObjects
         );
+
+        RegisterProjectileLifetime(proj);
+        RegisterAttackTrigger(proj);
+        ApplyAttackDelay();
+
+        return true;
+    }
+
+    void RegisterProjectileLifetime(GameObject proj)
+    {
         projectiles.Add(proj);
-        Chrono.Instance.After(attackPermanence, () => {
+        Chrono.Instance.After(attackPermanence, () =>
+        {
             projectiles.Remove(proj);
             Destroy(proj);
         });
-        
-        // Apply attack delay
+    }
+
+    void RegisterAttackTrigger(GameObject proj)
+    {
+        var at = proj.GetComponent<AttackTrigger>();
+        at.OnAttackHit += (o, e) => {
+            e.Damageable.Damage(transform.parent.gameObject, attackDamage);
+        };
+    }
+
+    /// <summary>
+    /// Applies attack delay, freeing the ability to attack after the set delay.
+    /// </summary>
+    void ApplyAttackDelay()
+    {
         canAttack = false;
-        Chrono.Instance.After(attackDelay, () => {
+        Chrono.Instance.After(attackDelay, () =>
+        {
             canAttack = true;
         });
-
-        return true;
     }
 }
