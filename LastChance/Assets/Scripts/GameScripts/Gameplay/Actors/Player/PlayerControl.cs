@@ -8,17 +8,21 @@ using UnityEngine;
 /// </summary>
 public class PlayerControl : MonoBehaviour
 {
+    Character character;
     IMoveable moveable;
     ICharacterAnimator animator;
 
     void Start()
     {
+        character = GetComponent<Character>();
         moveable = GetComponent<IMoveable>();
         animator = GetComponent<ICharacterAnimator>();
     }
 
     void FixedUpdate()
     {
+        if (!character.healthProperties.alive) return;
+
         ProcessMovementInput();
         ProcessRotationInput();
         ProcessAttackInput();
