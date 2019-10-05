@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IWeaponAnimator
+/// <summary>
+/// Classes that make weapons attack.
+/// </summary>
+public interface IWeaponAttacker
 {
     void Attack();
 }

@@ -34,12 +34,13 @@ public class SpawnManager : MonoBehaviour
     /// The distance before mass-based modification to spawn enemies outside
     /// of the player's view.
     /// </summary>
-    [SerializeField] float baseSpawnDistance;
+    [SerializeField] float baseSpawnDistance = 10;
     /// <summary>
     /// The maximum number of enemies before we should stop spawning more.
     /// </summary>
-    [SerializeField] int maxConcurrentEnemies;
-    [SerializeField] SpawnableProperties spawnableProperties;
+    [SerializeField] int maxConcurrentEnemies = 2;
+    [SerializeField] SpawnableProperties spawnableProperties
+        = new SpawnableProperties();
     Transform dynamicObjects;
     List<GameObject> spawnedEnemies = new List<GameObject>();
     Character player;

@@ -9,11 +9,11 @@ using UnityEngine;
 public class CharacterAnimator : MonoBehaviour
 {
     Animator animator;
-    IWeaponAnimator weaponAnimator;
+    IWeaponAttacker weaponAttacker;
 
     void Start() {
         animator = GetComponent<Animator>();
-        weaponAnimator = GetComponentInChildren<IWeaponAnimator>();
+        weaponAttacker = GetComponentInChildren<IWeaponAttacker>();
     }
 
     /// <summary>
@@ -21,7 +21,7 @@ public class CharacterAnimator : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     public bool Attack() {
-        weaponAnimator.Attack();
+        weaponAttacker.Attack();
         return true;
     }
 }

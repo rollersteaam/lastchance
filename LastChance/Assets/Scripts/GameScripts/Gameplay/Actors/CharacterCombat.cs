@@ -20,12 +20,8 @@ public class CharacterCombat : MonoBehaviour, IDamageable
         characterAnimator = GetComponent<CharacterAnimator>();
 
         armory = GameObject.FindWithTag("Armory").GetComponent<Armory>();
-        character.combatProperties.weapon = Instantiate(
-            armory.weapons.sword,
-            transform.position,
-            Quaternion.identity,
-            transform
-        );
+        
+        GetWeaponFromArmory();
     }
 
     /// <summary>
@@ -36,8 +32,7 @@ public class CharacterCombat : MonoBehaviour, IDamageable
         if (!characterAnimator.Attack())
             return false;
 
-        // Create temporary attack blacklist to avoid double hit
-        
+        // TODO: Create temporary attack blacklist to avoid double hit
 
         return true;
     }
@@ -72,6 +67,22 @@ public class CharacterCombat : MonoBehaviour, IDamageable
             character.healthProperties.health = 0;
             Kill();
         }
+    }
+
+    /// <summary>
+    /// Gets weapon from armory service if the actor wasn't already provided
+    /// one.
+    /// </summary>
+    void GetWeaponFromArmory()
+    {
+        if (character.combatProperties.weapon != null) return;
+
+        character.combatProperties.weapon = Instantiate(
+            armory.weapons.sword,
+            transform.position,
+            Quaternion.identity,
+            transform
+        );
     }
 
     /// <summary>
