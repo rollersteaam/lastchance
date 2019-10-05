@@ -16,6 +16,6 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.AddRelativeForce(Vector2.up * 300);
+        rb.AddRelativeForce(Vector2.up * 30, ForceMode2D.Impulse);
     }
 }

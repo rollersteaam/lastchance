@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SpawnableProperties {
+public class SpawnableProperties
+{
     public GameObject quarkEnemy;
 
     /// <summary>
@@ -11,7 +12,8 @@ public class SpawnableProperties {
     /// Chooses an enemy to spawn at random.
     /// </summary>
     /// <returns></returns>
-    public GameObject Choose() {
+    public GameObject Choose()
+    {
         return quarkEnemy;
     }
 
@@ -20,7 +22,8 @@ public class SpawnableProperties {
     /// Chooses an enemy based on player's evolution.
     /// </summary>
     /// <returns></returns>
-    public GameObject ChooseForPlayerEvo() {
+    public GameObject ChooseForPlayerEvo()
+    {
         return quarkEnemy;
     }
 }
@@ -39,7 +42,8 @@ public class SpawnManager : MonoBehaviour
     /// The maximum number of enemies before we should stop spawning more.
     /// </summary>
     [SerializeField] int maxConcurrentEnemies = 2;
-    [SerializeField] SpawnableProperties spawnableProperties
+    [SerializeField]
+    SpawnableProperties spawnableProperties
         = new SpawnableProperties();
     Transform dynamicObjects;
     List<GameObject> spawnedEnemies = new List<GameObject>();
@@ -60,7 +64,8 @@ public class SpawnManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (spawnedEnemies.Count < maxConcurrentEnemies) {
+        if (spawnedEnemies.Count < maxConcurrentEnemies)
+        {
             SpawnEnemy();
         }
     }
@@ -68,7 +73,8 @@ public class SpawnManager : MonoBehaviour
     /// <summary>
     /// Spawns an enemy.
     /// </summary>
-    void SpawnEnemy() {
+    void SpawnEnemy()
+    {
         var position = GenerateRandomPositionFromPlayer();
 
         var gameObj = Instantiate(
@@ -78,7 +84,8 @@ public class SpawnManager : MonoBehaviour
             dynamicObjects.transform
         );
         var combat = gameObj.GetComponent<CharacterCombat>();
-        combat.OnDeath += (o, e) => {
+        combat.OnDeath += (o, e) =>
+        {
             spawnedEnemies.Remove(gameObj);
         };
         spawnedEnemies.Add(gameObj);
@@ -88,7 +95,8 @@ public class SpawnManager : MonoBehaviour
     /// Generates a random position outside of the player's view.
     /// </summary>
     /// <returns></returns>
-    Vector3 GenerateRandomPositionFromPlayer() {
+    Vector3 GenerateRandomPositionFromPlayer()
+    {
         var statMul = player
             .evolutionProperties
             .CurrentEvolution
@@ -96,19 +104,22 @@ public class SpawnManager : MonoBehaviour
         var radius = baseSpawnDistance * statMul;
 
         var position = GenerateRandomCircularPosition(radius);
-        
+
         return player.transform.position + position;
     }
 
     /// <summary>
-    /// Generates a random position within a circle radius.
+    /// Generates a random position on a circle with the provided radius.
     /// </summary>
     /// <param name="radius"></param>
     /// <returns></returns>
     Vector3 GenerateRandomCircularPosition(float radius)
-        => new Vector3(
-            UnityEngine.Random.Range(-1, 1),
-            UnityEngine.Random.Range(-1, 1),
+    {
+        var rads = UnityEngine.Random.Range(0, 360) * Mathf.Deg2Rad;
+        return new Vector3(
+            Mathf.Sin(rads),
+            Mathf.Cos(rads),
             0
         ) * radius;
+    }
 }
