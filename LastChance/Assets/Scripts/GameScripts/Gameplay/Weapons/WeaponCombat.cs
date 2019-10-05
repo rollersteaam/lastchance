@@ -22,6 +22,7 @@ public class WeaponCombat : MonoBehaviour
     }
 
     void OnAttackHit(object sender, AttackHitEventArgs attackHit) {
+        Debug.Log("YOU'RE ALMOST DONE!");
         attackHit.Damageable.Damage(wielder, weaponDamage);
     }
 }
