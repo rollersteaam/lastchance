@@ -35,6 +35,20 @@ public class EvolvingBody : MonoBehaviour
         Evolve(character.evolutionProperties.initialEvolution);
     }
 
+    /// <summary>
+    /// Sent when an incoming collider makes contact with this object's
+    /// collider (2D physics only).
+    /// </summary>
+    /// <param name="other">The Collision2D data associated with this collision.</param>
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        Character otherChar = other.gameObject.GetComponent<Character>();
+
+        if (otherChar == null) return;
+
+        AttemptEvolve(otherChar);
+    }
+
     public void Evolve(EvolutionType evolutionType)
     {
         Evolution evolution = library.GetEvolution(evolutionType);
@@ -43,12 +57,43 @@ public class EvolvingBody : MonoBehaviour
         Camera.main.transform.position = new Vector3(
             camPos.x,
             camPos.y,
-            evolution.cameraZ    
+            evolution.cameraZ
         );
-
         col.radius = evolution.colliderRadius;
         rend.sprite = evolution.sprite;
         rb.mass = evolution.mass;
+
+        float statMul = rb.mass / 0.5f;
+        character.healthProperties.health = Mathf.RoundToInt(100 * statMul);
+        character.movementProperties.speed = Mathf.RoundToInt(300 * statMul);
+
         character.evolutionProperties.CurrentEvolution = evolution;
+    }
+
+    /// <summary>
+    /// Attempts to consume and evolve from another character object.
+    /// </summary>
+    /// <param name="character"></param>
+    void AttemptEvolve(Character target)
+    {
+        bool targetStillAlive = target.healthProperties.alive;
+        if (targetStillAlive) return;
+
+        bool currentlyDead = !character.healthProperties.alive;
+        if (currentlyDead) return;
+
+        EvolutionType targetEvolution = target
+            .evolutionProperties
+            .CurrentEvolution
+            .type;
+        EvolutionType currentEvolution = character
+            .evolutionProperties
+            .CurrentEvolution
+            .type;
+        bool invalidEvolution = targetEvolution != currentEvolution;
+        Debug.Log("You're not suitable to evolve from this.");
+        if (invalidEvolution) return;
+
+        Evolve(character.evolutionProperties.CurrentEvolution.nextEvolution);
     }
 }

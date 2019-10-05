@@ -4,13 +4,15 @@ using UnityEngine;
 
 public enum EvolutionType
 {
-    Force, Quark, Particle, Atom, Compound, Bacteria, Insect, Creature, Animal
+    Force, Quark, Particle, Atom, Compound, Bacteria, Insect, Creature,
+    Animal, None
 }
 
 [System.Serializable]
 public struct Evolution
 {
     public EvolutionType type;
+    public EvolutionType nextEvolution;
     /// <summary>
     /// The amount to zoom the camera out by when the player evolves into this
     /// form.
