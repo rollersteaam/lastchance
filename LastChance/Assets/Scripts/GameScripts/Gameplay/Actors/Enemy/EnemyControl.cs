@@ -29,14 +29,16 @@ public class EnemyControl : MonoBehaviour
     void FixedUpdate() {
         if (!character.healthProperties.alive) return;
 
-        EvaluatePosition();
+        EvaluatePlayerPosition();
     }
 
     /// <summary>
     /// Evaluates the current position of the enemy to decide whether to
     /// attack or not.
     /// </summary>
-    void EvaluatePosition() {
+    void EvaluatePlayerPosition() {
+        if (!player.healthProperties.alive) return;
+
         Vector2 difference = player.transform.position - transform.position;
 
         if (attackJudge.ShouldAttack(difference.magnitude)) {
