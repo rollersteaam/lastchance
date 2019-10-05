@@ -11,6 +11,7 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
     [SerializeField] int attackDamage;
     [SerializeField] float attackDelay;
     [SerializeField] float attackPermanence;
+    [SerializeField] float attackDistanceRange;
     bool canAttack = true;
     List<GameObject> projectiles = new List<GameObject>();
     Transform dynamicObjects;
@@ -71,4 +72,7 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
             canAttack = true;
         });
     }
+
+    public bool InRange(float targetDistance)
+        => targetDistance < attackDistanceRange;
 }

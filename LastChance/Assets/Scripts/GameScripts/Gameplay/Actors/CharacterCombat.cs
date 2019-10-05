@@ -82,7 +82,7 @@ public class CharacterCombat : MonoBehaviour, IDamageable
         if (character.combatProperties.weapon != null) return;
 
         character.combatProperties.weapon = Instantiate(
-            armory.weapons.sword,
+            armory.weapons.Choose(),
             transform.position,
             Quaternion.identity,
             transform

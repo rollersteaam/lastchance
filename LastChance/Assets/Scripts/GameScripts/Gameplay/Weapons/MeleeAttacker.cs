@@ -9,6 +9,7 @@ using UnityEngine;
 public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
 {
     [SerializeField] int weaponDamage = 10;
+    [SerializeField] float weaponRange = 3;
     [SerializeField] float attackDelay;
     bool canAttack = true;
     Animator animator;
@@ -54,4 +55,7 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
             canAttack = true;
         });
     }
+
+    public bool InRange(float targetDistance)
+        => targetDistance < weaponRange;
 }

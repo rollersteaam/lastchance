@@ -5,13 +5,8 @@ using UnityEngine;
 /// <summary>
 /// Methods to judge and make an enemy fight.
 /// </summary>
-public class EnemyCombat : MonoBehaviour, IEnemyAttacker, IAttacker
+public class EnemyCombat : MonoBehaviour, IAttacker
 {
-    /// <summary>
-    /// How far an enemy can attack.
-    /// </summary>
-    [SerializeField]
-    float attackDistance = 3;
     CharacterAnimator animator;
     bool canAttack = true;
 
@@ -38,15 +33,5 @@ public class EnemyCombat : MonoBehaviour, IEnemyAttacker, IAttacker
         {
             canAttack = true;
         });
-    }
-
-    /// <summary>
-    /// Whether the enemy should attack.
-    /// </summary>
-    /// <param name="distance">Distance from an enemy.</param>
-    /// <returns></returns>
-    public bool ShouldAttack(float distance)
-    {
-        return distance <= attackDistance;
     }
 }

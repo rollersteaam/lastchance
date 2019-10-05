@@ -4,17 +4,23 @@ using UnityEngine;
 
 [System.Serializable]
 public class ArmoryWeapons {
+    // TODO: Implement this process as a pattern
     public GameObject sword;
+    public GameObject gun;
 
     /// <summary>
-    /// TODO: IMPLEMENT
-    /// Randomly chooses a weapon.
+    /// Randomly chooses a weapon from the armory.
     /// </summary>
     /// <returns></returns>
     public GameObject Choose() {
-        // TODO: i've noticed this is a pattern.
-        //  We could implement some kind of InspectorCollection or something?
-        return sword;
+        switch (UnityEngine.Random.Range(0, 2)) {
+            case 0:
+                return sword;
+            case 1:
+                return gun;
+            default:
+                throw new System.NotImplementedException();
+        }
     }
 }
 

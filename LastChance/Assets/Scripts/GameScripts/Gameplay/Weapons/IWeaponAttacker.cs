@@ -8,4 +8,9 @@ using UnityEngine;
 public interface IWeaponAttacker
 {
     bool Attack();
+    /// <summary>
+    /// Whether the weapon is in range or not.
+    /// </summary>
+    /// <returns></returns>
+    bool InRange(float targetDistance);
 }

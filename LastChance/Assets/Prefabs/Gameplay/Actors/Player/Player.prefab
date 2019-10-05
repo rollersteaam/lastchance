@@ -106,13 +106,9 @@ MonoBehaviour:
   movementProperties:
     speed: 300
   evolutionProperties:
-    currentEvolution:
-      type: 1
-      cameraZ: -20
-      colliderRadius: 0.936648
-      sprite: {fileID: 0}
-      mass: 0
-      damageMultiplier: 1
+    initialEvolution: 0
+  combatProperties:
+    weapon: {fileID: 0}
 --- !u!114 &2707931619798568327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,10 +206,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0dfb6318087f94298b93b5c02255df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialEvolution:
-    type: 1
-    cameraZ: -20
-    colliderRadius: 0.936648
-    sprite: {fileID: 0}
-    mass: 0
-    damageMultiplier: 1
