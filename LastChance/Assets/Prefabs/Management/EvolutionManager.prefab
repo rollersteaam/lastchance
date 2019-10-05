@@ -46,7 +46,7 @@ MonoBehaviour:
   evolutions:
     forceEvolution:
       type: 0
-      cameraZ: -10
+      cameraZ: -15
       colliderRadius: 0.468324
       sprite: {fileID: 21300000, guid: 18b804a6abfaf75418a6f2c32b66d15c, type: 3}
       mass: 0.5
