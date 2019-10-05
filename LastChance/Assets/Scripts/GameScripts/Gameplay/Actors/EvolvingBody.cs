@@ -63,9 +63,8 @@ public class EvolvingBody : MonoBehaviour
         rend.sprite = evolution.sprite;
         rb.mass = evolution.mass;
 
-        float statMul = rb.mass / 0.5f;
-        character.healthProperties.health = Mathf.RoundToInt(100 * statMul);
-        character.movementProperties.speed = Mathf.RoundToInt(300 * statMul);
+        character.healthProperties.health = evolution.CalculateMaximumHealth();
+        character.movementProperties.speed = evolution.CalculateMaximumSpeed();
 
         character.evolutionProperties.CurrentEvolution = evolution;
     }

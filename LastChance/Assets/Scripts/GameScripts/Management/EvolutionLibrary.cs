@@ -34,6 +34,31 @@ public struct Evolution
     /// The amount to multiply damage by.
     /// </summary>
     public float damageMultiplier;
+
+    /// <summary>
+    /// Calculates the multiplier by which all basic stats should be
+    /// multiplied by as a result of a linear progression from the base mass
+    /// (0.5f).
+    /// </summary>
+    /// <returns></returns>
+    public float CalculateStatMul()
+        => mass / 0.5f;
+
+    /// <summary>
+    /// Calculates maximum health, deriving it from a linear progression based
+    /// off mass (given by <see cref="CalculateStatMul()"/>).
+    /// </summary>
+    /// <returns></returns>
+    public int CalculateMaximumHealth()
+        => Mathf.RoundToInt(100 * CalculateStatMul());
+
+    /// <summary>
+    /// Calculates max speed based off a base value and
+    /// <see cref="CalculateStatMul()"/>.
+    /// </summary>
+    /// <returns></returns>
+    public int CalculateMaximumSpeed()
+        => Mathf.RoundToInt(300 * CalculateStatMul());
 }
 
 [System.Serializable]

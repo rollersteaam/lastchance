@@ -48,3 +48,6 @@ TagManager:
   - name: Characters
     uniqueID: 3099913627
     locked: 0
+  - name: GUI
+    uniqueID: 2854707911
+    locked: 0
