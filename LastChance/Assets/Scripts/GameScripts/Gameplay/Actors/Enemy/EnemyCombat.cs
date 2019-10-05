@@ -12,12 +12,27 @@ public class EnemyCombat : MonoBehaviour, IEnemyAttackJudge, IAttacker
     /// </summary>
     [SerializeField]
     float attackDistance;
+    CharacterAnimator animator;
+    bool canAttack = true;
+
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+        animator = GetComponent<CharacterAnimator>();
+    }
 
     /// <summary>
     /// Makes the character attack.
     /// </summary>
     public void Attack() {
+        if (!canAttack) return;
 
+        animator.Attack();
+        canAttack = false;
+        StartCoroutine(AttackDelay());
     }
 
     /// <summary>
@@ -27,5 +42,19 @@ public class EnemyCombat : MonoBehaviour, IEnemyAttackJudge, IAttacker
     /// <returns></returns>
     public bool ShouldAttack(float distance) {
         return distance <= attackDistance;
+    }
+
+    private IEnumerator AttackDelay()
+    {
+        float duration = 0.5f;
+
+        float normalizedTime = 0;
+        while(normalizedTime <= 1f)
+        {
+            normalizedTime += Time.deltaTime / duration;
+            yield return null;
+        }
+
+        canAttack = true;
     }
 }

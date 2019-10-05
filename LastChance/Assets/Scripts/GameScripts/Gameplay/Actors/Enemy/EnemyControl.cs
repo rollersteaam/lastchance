@@ -42,6 +42,11 @@ public class EnemyControl : MonoBehaviour
         if (attackJudge.ShouldAttack(difference.magnitude)) {
             attacker.Attack();
         } else {
+            var playerScreenPos = Camera.main.WorldToScreenPoint(
+                player.transform.position
+            );
+            moveable.TurnToScreenPoint(playerScreenPos);
+
             moveable.Move(difference);
         }
     }
