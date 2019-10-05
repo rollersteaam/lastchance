@@ -58,7 +58,7 @@ public struct Evolution
     /// </summary>
     /// <returns></returns>
     public int CalculateMaximumSpeed()
-        => Mathf.RoundToInt(300 * CalculateStatMul());
+        => Mathf.RoundToInt(260 * CalculateStatMul());
 }
 
 [System.Serializable]

@@ -67,10 +67,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (concurrentEnemies < maxConcurrentEnemies)
         {
-            Chrono.Instance.After(UnityEngine.Random.Range(2f, 4f), () =>
-            {
-                SpawnEnemy();
-            });
+            SpawnEnemy();
         }
     }
 
@@ -79,22 +76,26 @@ public class SpawnManager : MonoBehaviour
     /// </summary>
     void SpawnEnemy()
     {
-        var position = GenerateRandomPositionFromPlayer();
+        Chrono.Instance.After(UnityEngine.Random.Range(2f, 4f), () =>
+        {        
+            var position = GenerateRandomPositionFromPlayer();
 
-        var gameObj = Instantiate(
-            spawnableProperties.quarkEnemy,
-            position,
-            Quaternion.identity,
-            dynamicObjects.transform
-        );
-        var combat = gameObj.GetComponent<CharacterCombat>();
-        combat.OnDeath += (o, e) =>
-        {
-            Destroy(gameObj, 4f);
-            spawnedEnemies.Remove(gameObj);
-            concurrentEnemies--;
-        };
-        spawnedEnemies.Add(gameObj);
+            var gameObj = Instantiate(
+                spawnableProperties.quarkEnemy,
+                position,
+                Quaternion.identity,
+                dynamicObjects.transform
+            );
+            var combat = gameObj.GetComponent<CharacterCombat>();
+            combat.OnDeath += (o, e) =>
+            {
+                Destroy(gameObj, 4f);
+                spawnedEnemies.Remove(gameObj);
+                concurrentEnemies--;
+            };
+            spawnedEnemies.Add(gameObj);
+        });
+
         concurrentEnemies++;
     }
 
