@@ -40,7 +40,7 @@ public class CharacterControl : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        if (h == 0 || v == 0) return;
+        if (h == 0 && v == 0) return;
 
         moveable.Move(new Vector2(h, v));
     }
