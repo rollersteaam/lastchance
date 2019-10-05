@@ -18,14 +18,21 @@ public class CharacterMovement : MonoBehaviour, IMoveable
 
     public void Move(Vector2 direction)
     {
-        rb.AddRelativeForce(
+        rb.AddForce(
             direction.normalized * character.movementProperties.speed
         );
     }
 
-    public void TurnTo(Vector2 target)
+    public void TurnToScreenPoint(Vector3 target)
     {
-        transform.rotation.SetLookRotation(target);
-        // TODO: Alternatively set Euler rotation using trigonometry to vector target
+        Vector3 diff = target - Camera.main.WorldToScreenPoint(transform.position);
+        diff.Normalize();
+
+        float zRot = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(
+            0f,
+            0f,
+            zRot - 90f
+        );
     }
 }

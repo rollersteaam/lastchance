@@ -29,9 +29,7 @@ public class CharacterControl : MonoBehaviour
     /// </summary>
     void ProcessRotationInput()
     {
-        // TODO: Could be wrong, figure this out
-        var worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        moveable.TurnTo(worldPos);
+        moveable.TurnToScreenPoint(Input.mousePosition);
     }
 
     /// <summary>

@@ -20,8 +20,8 @@ public interface IMoveable
     /// </param>
     void Move(Vector2 direction);
     /// <summary>
-    /// Turns character to target vector.
+    /// Turns character to target vector with respect to screen coordinates.
     /// </summary>
     /// <param name="target"></param>
-    void TurnTo(Vector2 target);
+    void TurnToScreenPoint(Vector3 target);
 }
