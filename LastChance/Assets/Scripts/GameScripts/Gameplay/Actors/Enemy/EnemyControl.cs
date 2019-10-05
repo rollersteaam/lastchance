@@ -16,14 +16,14 @@ public class EnemyControl : MonoBehaviour
     Character character;
     CharacterCombat combat;
     IMoveable moveable;
-    IEnemyAttackJudge attackJudge;
+    IEnemyAttacker attacker;
 
     void Start() {
         player = GameObject.FindWithTag("Player").GetComponent<Character>();
         character = GetComponent<Character>();
         combat = GetComponent<CharacterCombat>();
         moveable = GetComponent<IMoveable>();
-        attackJudge = GetComponent<IEnemyAttackJudge>();
+        attacker = GetComponent<IEnemyAttacker>();
     }
 
     void FixedUpdate() {
@@ -41,7 +41,7 @@ public class EnemyControl : MonoBehaviour
 
         Vector2 difference = player.transform.position - transform.position;
 
-        if (attackJudge.ShouldAttack(difference.magnitude)) {
+        if (attacker.ShouldAttack(difference.magnitude)) {
             combat.Attack();
         } else {
             var playerScreenPos = Camera.main.WorldToScreenPoint(

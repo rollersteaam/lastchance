@@ -95,3 +95,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 5139659441436590483, guid: c78d7a4587b6d354192d92c8214364ce,
     type: 3}
+  attackDamage: 10
+  attackDelay: 0
+  attackPermanence: 1

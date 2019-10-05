@@ -10,7 +10,7 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
 {
     [SerializeField] int weaponDamage = 10;
     [SerializeField] float attackDelay;
-    bool canAttack;
+    bool canAttack = true;
     Animator animator;
     GameObject wielder;
     AttackTrigger attackTrigger;

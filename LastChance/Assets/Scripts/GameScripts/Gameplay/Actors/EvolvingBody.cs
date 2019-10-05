@@ -67,7 +67,10 @@ public class EvolvingBody : MonoBehaviour
         rb.mass = evolution.mass;
 
         character.healthProperties.health = evolution.CalculateMaximumHealth();
-        character.movementProperties.speed = evolution.CalculateMaximumSpeed();
+
+        int playerBonus = IsPlayer() ? 30 : 0;
+        character.movementProperties.speed =
+            evolution.CalculateMaximumSpeed() + playerBonus;
 
         character.evolutionProperties.CurrentEvolution = evolution;
     }

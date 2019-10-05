@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Modules that judge whether an enemy should attack.
 /// </summary>
-public interface IEnemyAttackJudge
+public interface IEnemyAttacker
 {
     bool ShouldAttack(float distance);
 }

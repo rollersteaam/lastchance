@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Methods to judge and make an enemy fight.
 /// </summary>
-public class EnemyCombat : MonoBehaviour, IEnemyAttackJudge, IAttacker
+public class EnemyCombat : MonoBehaviour, IEnemyAttacker, IAttacker
 {
     /// <summary>
     /// How far an enemy can attack.

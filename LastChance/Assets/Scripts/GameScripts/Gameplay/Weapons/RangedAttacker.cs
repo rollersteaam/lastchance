@@ -11,8 +11,8 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
     [SerializeField] int attackDamage;
     [SerializeField] float attackDelay;
     [SerializeField] float attackPermanence;
-    bool canAttack;
-    List<GameObject> projectiles;
+    bool canAttack = true;
+    List<GameObject> projectiles = new List<GameObject>();
     Transform dynamicObjects;
 
     void Start()
@@ -28,7 +28,7 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
         var proj = Instantiate(
             projectile,
             transform.position,
-            Quaternion.identity,
+            transform.rotation,
             dynamicObjects
         );
 
