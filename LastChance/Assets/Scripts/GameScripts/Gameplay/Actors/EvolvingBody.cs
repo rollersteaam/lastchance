@@ -66,11 +66,14 @@ public class EvolvingBody : MonoBehaviour
         rend.sprite = evolution.sprite;
         rb.mass = evolution.mass;
 
-        character.healthProperties.health = evolution.CalculateMaximumHealth();
-
-        int playerBonus = IsPlayer() ? 30 : 0;
-        character.movementProperties.speed =
-            evolution.CalculateMaximumSpeed() + playerBonus;
+        character.healthProperties.health = Mathf.RoundToInt(
+            evolution.CalculateMaximumHealth() *
+            Difficulty.Instance.GetHealthMult(gameObject)
+        );
+        character.movementProperties.speed = Mathf.RoundToInt(
+            evolution.CalculateMaximumSpeed() *
+            Difficulty.Instance.GetSpeedMult(gameObject)
+        );
 
         character.evolutionProperties.CurrentEvolution = evolution;
     }

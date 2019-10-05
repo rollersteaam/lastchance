@@ -185,3 +185,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamage: 20
+  attackDelay: 0.2

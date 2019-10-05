@@ -49,15 +49,19 @@ public class CharacterCombat : MonoBehaviour, IDamageable
         // Hitting the deceased is not very nice at all.
         if (!character.healthProperties.alive) return;
 
-        // Apply evolution damage multipliers
+        // Apply damage multipliers
         var atkChar = attacker.GetComponent<Character>();
         if (atkChar != null)
         {
-            var damageMult = atkChar
+            var dmgMult = atkChar
                 .evolutionProperties
                 .CurrentEvolution
                 .damageMultiplier;
-            amount = Mathf.RoundToInt(amount * damageMult);
+            amount = Mathf.RoundToInt(
+                amount *
+                dmgMult *
+                Difficulty.Instance.GetDamageMult(attacker)
+            );
         }
 
         character.healthProperties.health -= amount;

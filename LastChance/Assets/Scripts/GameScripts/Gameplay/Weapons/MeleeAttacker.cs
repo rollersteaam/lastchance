@@ -40,11 +40,18 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
         
         animator.Play("Attack", -1, 0f);
 
-        canAttack = false;
-        Chrono.Instance.After(attackDelay, () => {
-            canAttack = true;
-        });
+        ApplyAttackDelay();
 
         return true;
+    }
+
+    void ApplyAttackDelay() {
+        canAttack = false;
+        var delayMult = Difficulty.Instance.GetAttackDelayMult(
+            transform.parent.gameObject
+        );
+        Chrono.Instance.After(attackDelay * delayMult, () => {
+            canAttack = true;
+        });
     }
 }

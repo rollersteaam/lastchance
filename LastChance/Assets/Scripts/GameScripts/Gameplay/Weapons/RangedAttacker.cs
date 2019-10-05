@@ -63,7 +63,10 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
     void ApplyAttackDelay()
     {
         canAttack = false;
-        Chrono.Instance.After(attackDelay, () =>
+        var delayMult = Difficulty.Instance.GetAttackDelayMult(
+            transform.parent.gameObject
+        );
+        Chrono.Instance.After(attackDelay * delayMult, () =>
         {
             canAttack = true;
         });

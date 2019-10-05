@@ -19,7 +19,8 @@ public class CharacterMovement : MonoBehaviour, IMoveable
     public void Move(Vector2 direction)
     {
         rb.AddForce(
-            direction.normalized * character.movementProperties.speed
+            direction.normalized
+            * character.movementProperties.speed
         );
     }
 
