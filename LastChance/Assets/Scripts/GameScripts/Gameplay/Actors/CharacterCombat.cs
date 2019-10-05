@@ -8,13 +8,16 @@ using UnityEngine;
 /// </summary>
 public class CharacterCombat : MonoBehaviour, IDamageable
 {
-    Armory armory;
-    Character character;
-
     public event EventHandler OnDeath;
 
-    void Start() {
+    Armory armory;
+    Character character;
+    CharacterAnimator characterAnimator;
+
+    void Start()
+    {
         character = GetComponent<Character>();
+        characterAnimator = GetComponent<CharacterAnimator>();
 
         armory = GameObject.FindWithTag("Armory").GetComponent<Armory>();
         character.combatProperties.weapon = Instantiate(
@@ -25,6 +28,25 @@ public class CharacterCombat : MonoBehaviour, IDamageable
         );
     }
 
+    /// <summary>
+    /// A swing and a... miss.
+    /// </summary>
+    public bool Attack()
+    {
+        if (!characterAnimator.Attack())
+            return false;
+
+        // Create temporary attack blacklist to avoid double hit
+        
+
+        return true;
+    }
+
+    /// <summary>
+    /// Damages the current character.
+    /// </summary>
+    /// <param name="attacker"></param>
+    /// <param name="amount"></param>
     public void Damage(GameObject attacker, int amount)
     {
         // No hurting yourself!!!
@@ -34,7 +56,8 @@ public class CharacterCombat : MonoBehaviour, IDamageable
 
         // Apply evolution damage multipliers
         var atkChar = attacker.GetComponent<Character>();
-        if (atkChar != null) {
+        if (atkChar != null)
+        {
             var damageMult = atkChar
                 .evolutionProperties
                 .CurrentEvolution
@@ -44,16 +67,18 @@ public class CharacterCombat : MonoBehaviour, IDamageable
 
         character.healthProperties.health -= amount;
 
-        if (character.healthProperties.health <= 0) {
+        if (character.healthProperties.health <= 0)
+        {
             character.healthProperties.health = 0;
             Kill();
         }
     }
 
     /// <summary>
-    /// Kills the character.
+    /// Kills the current character.
     /// </summary>
-    void Kill() {
+    void Kill()
+    {
         character.healthProperties.alive = false;
         OnDeath?.Invoke(this, EventArgs.Empty);
     }

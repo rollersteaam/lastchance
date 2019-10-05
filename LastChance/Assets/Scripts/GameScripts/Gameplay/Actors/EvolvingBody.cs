@@ -25,7 +25,8 @@ public class EvolvingBody : MonoBehaviour
     void Start()
     {
         character = GetComponent<Character>();
-        library = GameObject.FindWithTag("EvolutionLibrary")
+        library = GameObject
+            .FindWithTag("EvolutionLibrary")
             .GetComponent<EvolutionLibrary>();
         col = GetComponent<CircleCollider2D>();
         rend = GetComponent<SpriteRenderer>();
@@ -51,6 +52,11 @@ public class EvolvingBody : MonoBehaviour
         AttemptEvolve(otherChar);
     }
 
+    /// <summary>
+    /// Changes characteristics about the character based on what they're
+    /// evolving into.
+    /// </summary>
+    /// <param name="evolutionType"></param>
     public void Evolve(EvolutionType evolutionType)
     {
         Evolution evolution = library.GetEvolution(evolutionType);

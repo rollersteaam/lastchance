@@ -19,7 +19,7 @@ public class AttackTrigger : MonoBehaviour
     /// attached to this object (2D physics only).
     /// </summary>
     /// <param name="other">The other Collider2D involved in this collision.</param>
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         var damageable = other.gameObject.GetComponent<IDamageable>();
 

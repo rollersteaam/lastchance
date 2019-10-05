@@ -6,7 +6,7 @@ using UnityEngine;
 /// Controls the animations of a character, blocking certain animations
 /// based on character state.
 /// </summary>
-public class CharacterAnimator : MonoBehaviour, ICharacterAnimator
+public class CharacterAnimator : MonoBehaviour
 {
     Animator animator;
     IWeaponAnimator weaponAnimator;

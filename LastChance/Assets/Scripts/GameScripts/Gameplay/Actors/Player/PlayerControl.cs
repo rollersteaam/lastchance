@@ -10,13 +10,13 @@ public class PlayerControl : MonoBehaviour
 {
     Character character;
     IMoveable moveable;
-    ICharacterAnimator animator;
+    CharacterCombat combat;
 
     void Start()
     {
         character = GetComponent<Character>();
         moveable = GetComponent<IMoveable>();
-        animator = GetComponent<ICharacterAnimator>();
+        combat = GetComponent<CharacterCombat>();
     }
 
     void FixedUpdate()
@@ -43,7 +43,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (Input.GetAxis("Fire1") == 0) return;
 
-        animator.Attack();
+        combat.Attack();
     }
 
     /// <summary>
