@@ -93,6 +93,7 @@ public class EvolvingBody : MonoBehaviour
         Debug.Log("You're not suitable to evolve from this.");
         if (invalidEvolution) return;
 
+        Destroy(target.gameObject);
         Evolve(character.evolutionProperties.CurrentEvolution.nextEvolution);
     }
 }
