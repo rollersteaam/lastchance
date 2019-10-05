@@ -45,6 +45,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     SpawnableProperties spawnableProperties
         = new SpawnableProperties();
+    int concurrentEnemies;
     Transform dynamicObjects;
     List<GameObject> spawnedEnemies = new List<GameObject>();
     Character player;
@@ -64,9 +65,12 @@ public class SpawnManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (spawnedEnemies.Count < maxConcurrentEnemies)
+        if (concurrentEnemies < maxConcurrentEnemies)
         {
-            SpawnEnemy();
+            Chrono.Instance.After(UnityEngine.Random.Range(2f, 4f), () =>
+            {
+                SpawnEnemy();
+            });
         }
     }
 
@@ -86,9 +90,12 @@ public class SpawnManager : MonoBehaviour
         var combat = gameObj.GetComponent<CharacterCombat>();
         combat.OnDeath += (o, e) =>
         {
+            Destroy(gameObj, 4f);
             spawnedEnemies.Remove(gameObj);
+            concurrentEnemies--;
         };
         spawnedEnemies.Add(gameObj);
+        concurrentEnemies++;
     }
 
     /// <summary>

@@ -43,3 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed30a5727fadca049883c8ed4ff97563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySpeedMultplier: 0.8
+  enemyHealthMultiplier: 1
+  enemyAttackDelayMultiplier: 1.5
+  enemyDamageMultiplier: 0.8
