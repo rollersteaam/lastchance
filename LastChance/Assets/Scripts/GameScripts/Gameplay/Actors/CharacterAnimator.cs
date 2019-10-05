@@ -6,12 +6,22 @@ using UnityEngine;
 /// Controls the animations of a character, blocking certain animations
 /// based on character state.
 /// </summary>
-public class CharacterAnimator : MonoBehaviour
+public class CharacterAnimator : MonoBehaviour, ICharacterAnimator
 {
+    Animator animator;
+    IWeaponAnimator weaponAnimator;
+
+    void Start() {
+        animator = GetComponent<Animator>();
+        weaponAnimator = GetComponentInChildren<IWeaponAnimator>();
+    }
+
     /// <summary>
     /// Tries to make the character attack.
     /// </summary>
-    public void Attack() {
-
+    /// <returns></returns>
+    public bool Attack() {
+        weaponAnimator.Attack();
+        return true;
     }
 }
