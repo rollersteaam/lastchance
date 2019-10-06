@@ -18,6 +18,7 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
     Animator animator;
     AudioSource audioSource;
     AudioClip anticipationSound;
+    Character character;
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
         audioSource = GetComponent<AudioSource>();
         var proj = projectile.GetComponent<Bullet>();
         anticipationSound = proj.anticipationSound;
+        character = transform.parent.GetComponent<Character>();
     }
 
     public bool Attack()
@@ -34,7 +36,7 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
             return false;
 
         animator.Play("Anticipation");
-        audioSource.PlayOneShot(anticipationSound);
+        audioSource.PlayOneShot(anticipationSound, 2 + 1 * character.evolutionProperties.CurrentEvolution.CalculateStatMul());
 
         // Stop attack so anticipation can fire event for FireProjectile()
         canAttack = false;

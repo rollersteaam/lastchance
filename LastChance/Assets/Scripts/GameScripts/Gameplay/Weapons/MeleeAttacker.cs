@@ -18,6 +18,7 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker, IDamageSource
     [SerializeField] AudioClip anticipationSound;
     [SerializeField] AudioClip hitSound;
     AudioSource audioSource;
+    Character character;
 
     void Start()
     {
@@ -32,11 +33,12 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker, IDamageSource
         }
 
         audioSource = GetComponent<AudioSource>();
+        character = transform.parent.GetComponent<Character>();
     }
 
     void OnAttackHit(object sender, AttackHitEventArgs attackHit)
     {
-        attackHit.Damageable.Damage(wielder, attackTrigger.GetComponent<IDamageSource>(), weaponDamage);
+        attackHit.Damageable.Damage(wielder, this, weaponDamage);
     }
 
     public bool Attack()
@@ -46,7 +48,7 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker, IDamageSource
 
         canAttack = false;
         animator.Play("Anticipation");
-        audioSource.PlayOneShot(anticipationSound);
+        audioSource.PlayOneShot(anticipationSound, 2 + 1 * character.GetComponent<Character>().evolutionProperties.CurrentEvolution.CalculateStatMul());
 
         return true;
     }

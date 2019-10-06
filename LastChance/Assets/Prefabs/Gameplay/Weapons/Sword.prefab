@@ -188,6 +188,8 @@ MonoBehaviour:
   weaponDamage: 40
   weaponRange: 3
   attackDelay: 0.15
+  anticipationSound: {fileID: 8300000, guid: 9e915f01cfba4074bb267c00002198bd, type: 3}
+  hitSound: {fileID: 8300000, guid: 1cdddc0d5c635db49b99ee694d66014e, type: 3}
 --- !u!82 &659592960564415156
 AudioSource:
   m_ObjectHideFlags: 0
