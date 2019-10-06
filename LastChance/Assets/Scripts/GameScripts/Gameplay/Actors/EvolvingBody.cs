@@ -72,7 +72,8 @@ public class EvolvingBody : MonoBehaviour
             Difficulty.Instance.GetSpeedMult(gameObject)
         );
 
-        foreach (Transform child in transform) {
+        foreach (Transform child in transform)
+        {
             child.localScale = transform.localScale * evolution.CalculateStatMul();
         }
 
@@ -84,7 +85,8 @@ public class EvolvingBody : MonoBehaviour
     /// player.
     /// </summary>
     /// <param name="newZ"></param>
-    void SetCameraPosition(float newZ) {
+    void SetCameraPosition(float newZ)
+    {
         if (!IsPlayer()) return;
 
         var camPos = Camera.main.transform.position;
@@ -95,7 +97,8 @@ public class EvolvingBody : MonoBehaviour
         );
     }
 
-    bool IsPlayer() {
+    bool IsPlayer()
+    {
         return gameObject.tag == "Player";
     }
 
@@ -122,7 +125,12 @@ public class EvolvingBody : MonoBehaviour
         bool invalidEvolution = targetEvolution != currentEvolution;
         if (invalidEvolution) return;
 
-        if (character.evolutionProperties.CurrentEvolution.nextEvolution == EvolutionType.None) return;
+        if (character.evolutionProperties.CurrentEvolution.nextEvolution == EvolutionType.None)
+        {
+            Debug.Log("YOU WON");
+            ProgressionManager.Instance.Win();
+            return;
+        }
 
         Destroy(target.gameObject);
         Evolve(character.evolutionProperties.CurrentEvolution.nextEvolution);

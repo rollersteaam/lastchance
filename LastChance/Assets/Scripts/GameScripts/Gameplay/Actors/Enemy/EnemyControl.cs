@@ -44,6 +44,7 @@ public class EnemyControl : MonoBehaviour
     /// </summary>
     void EvaluatePlayerPosition() {
         if (!player.healthProperties.alive) return;
+        if (ProgressionManager.Instance.gameOver) return;
 
         Vector2 difference = player.transform.position - transform.position;
 
