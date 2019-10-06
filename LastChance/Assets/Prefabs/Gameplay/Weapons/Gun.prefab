@@ -97,7 +97,7 @@ MonoBehaviour:
   projectile: {fileID: 5139659441436590483, guid: c78d7a4587b6d354192d92c8214364ce,
     type: 3}
   attackDamage: 10
-  attackDelay: 0.1
+  attackDelay: 0.05
   attackPermanence: 1
   attackDistanceRange: 11
 --- !u!95 &1203422553456662257
@@ -110,7 +110,7 @@ Animator:
   m_GameObject: {fileID: 1608234314009631123}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 80756df562eb5884da564752b2f3ee2c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

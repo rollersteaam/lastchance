@@ -39,11 +39,21 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
         if (!canAttack)
             return false;
 
-        animator.Play("Attack", -1, 0f);
-
-        ApplyAttackDelay();
+        canAttack = false;
+        animator.Play("Anticipation");
 
         return true;
+    }
+
+    public void Swing()
+    {
+        animator.Play("Attack");
+    }
+
+    public void FinishAttack()
+    {
+        ApplyAttackDelay();
+        animator.Play("Stance");
     }
 
     public bool InRange(float targetDistance)
@@ -51,7 +61,7 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
 
     public void Cancel()
     {
-        animator.Play("Stance");
+        FinishAttack();
     }
 
     void ApplyAttackDelay()
