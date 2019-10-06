@@ -29,7 +29,7 @@ public class EnemyHealthGUI : MonoBehaviour
         var maxHealth = character
             .evolutionProperties
             .CurrentEvolution
-            .CalculateMaximumHealth();
+            .CalculateMaximumHealth() * Difficulty.Instance.GetHealthMult(character.gameObject);
             
         healthMask.SetHealth(health, maxHealth);
     }
