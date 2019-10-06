@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class CharacterCombat : MonoBehaviour, IDamageable
 {
+    public static event EventHandler OnPlayerDeath;
     public event EventHandler OnDeath;
 
     Armory armory;
@@ -20,7 +21,7 @@ public class CharacterCombat : MonoBehaviour, IDamageable
         characterAnimator = GetComponent<CharacterAnimator>();
 
         armory = GameObject.FindWithTag("Armory").GetComponent<Armory>();
-        
+
         GetWeaponFromArmory();
     }
 
@@ -96,5 +97,10 @@ public class CharacterCombat : MonoBehaviour, IDamageable
     {
         character.healthProperties.alive = false;
         OnDeath?.Invoke(this, EventArgs.Empty);
+
+        if (gameObject.tag == "Player")
+        {
+            OnPlayerDeath?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

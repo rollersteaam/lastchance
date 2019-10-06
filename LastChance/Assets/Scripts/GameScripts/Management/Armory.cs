@@ -7,17 +7,20 @@ public class ArmoryWeapons {
     // TODO: Implement this process as a pattern
     public GameObject sword;
     public GameObject gun;
+    public GameObject magic;
 
     /// <summary>
     /// Randomly chooses a weapon from the armory.
     /// </summary>
     /// <returns></returns>
     public GameObject Choose() {
-        switch (UnityEngine.Random.Range(0, 2)) {
+        switch (UnityEngine.Random.Range(0, 3)) {
             case 0:
                 return sword;
             case 1:
                 return gun;
+            case 2:
+                return magic;
             default:
                 throw new System.NotImplementedException();
         }
