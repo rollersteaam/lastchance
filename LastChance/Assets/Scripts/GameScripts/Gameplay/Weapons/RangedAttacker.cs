@@ -52,6 +52,7 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
             transform.rotation,
             dynamicObjects
         );
+        proj.transform.localScale = transform.localScale;
 
         RegisterProjectileLifetime(proj);
         RegisterAttackTrigger(proj);
