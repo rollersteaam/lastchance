@@ -119,6 +119,7 @@ public class CharacterCombat : MonoBehaviour, IDamageable
             Quaternion.identity,
             transform
         );
+        character.combatProperties.weapon.transform.localScale = transform.localScale;
     }
 
     /// <summary>
