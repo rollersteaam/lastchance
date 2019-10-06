@@ -6,7 +6,7 @@ using UnityEngine;
 /// Makes melee weapons attack. Depends on the 'Attack'
 /// animation state existing.
 /// </summary>
-public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
+public class MeleeAttacker : MonoBehaviour, IWeaponAttacker, IDamageSource
 {
     [SerializeField] int weaponDamage = 10;
     [SerializeField] float weaponRange = 3;
@@ -15,6 +15,9 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
     Animator animator;
     GameObject wielder;
     AttackTrigger attackTrigger;
+    [SerializeField] AudioClip anticipationSound;
+    [SerializeField] AudioClip hitSound;
+    AudioSource audioSource;
 
     void Start()
     {
@@ -27,11 +30,13 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
         {
             attackTrigger.OnAttackHit += OnAttackHit;
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnAttackHit(object sender, AttackHitEventArgs attackHit)
     {
-        attackHit.Damageable.Damage(wielder, weaponDamage);
+        attackHit.Damageable.Damage(wielder, attackTrigger.GetComponent<IDamageSource>(), weaponDamage);
     }
 
     public bool Attack()
@@ -41,6 +46,7 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
 
         canAttack = false;
         animator.Play("Anticipation");
+        audioSource.PlayOneShot(anticipationSound);
 
         return true;
     }
@@ -74,5 +80,10 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
         {
             canAttack = true;
         });
+    }
+
+    public AudioClip GetHitSound()
+    {
+        return hitSound;
     }
 }

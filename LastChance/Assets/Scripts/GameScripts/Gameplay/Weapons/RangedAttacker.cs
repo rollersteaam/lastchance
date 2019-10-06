@@ -16,11 +16,16 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
     List<GameObject> projectiles = new List<GameObject>();
     Transform dynamicObjects;
     Animator animator;
+    AudioSource audioSource;
+    AudioClip anticipationSound;
 
     void Start()
     {
         dynamicObjects = GameObject.FindWithTag("DynamicObjects").transform;
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        var proj = projectile.GetComponent<Bullet>();
+        anticipationSound = proj.anticipationSound;
     }
 
     public bool Attack()
@@ -29,6 +34,7 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
             return false;
 
         animator.Play("Anticipation");
+        audioSource.PlayOneShot(anticipationSound);
 
         // Stop attack so anticipation can fire event for FireProjectile()
         canAttack = false;
@@ -79,7 +85,8 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
         var at = proj.GetComponent<AttackTrigger>();
         at.OnAttackHit += (o, e) =>
         {
-            e.Damageable.Damage(transform.parent.gameObject, attackDamage);
+            var damageSource = proj.GetComponent<IDamageSource>();
+            e.Damageable.Damage(transform.parent.gameObject, damageSource, attackDamage);
         };
     }
 

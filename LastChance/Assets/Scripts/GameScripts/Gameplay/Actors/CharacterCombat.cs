@@ -15,12 +15,14 @@ public class CharacterCombat : MonoBehaviour, IDamageable
     Character character;
     CharacterAnimator characterAnimator;
     CharacterMovement characterMovement;
+    AudioSource audioSource;
 
     void Start()
     {
         character = GetComponent<Character>();
         characterAnimator = GetComponent<CharacterAnimator>();
         characterMovement = GetComponent<CharacterMovement>();
+        audioSource = GetComponent<AudioSource>();
 
         armory = GameObject.FindWithTag("Armory").GetComponent<Armory>();
 
@@ -45,7 +47,7 @@ public class CharacterCombat : MonoBehaviour, IDamageable
     /// </summary>
     /// <param name="attacker"></param>
     /// <param name="amount"></param>
-    public void Damage(GameObject attacker, int amount)
+    public void Damage(GameObject attacker, IDamageSource damageSource, int amount)
     {
         // No hurting yourself!!!
         if (attacker == gameObject) return;
@@ -72,6 +74,8 @@ public class CharacterCombat : MonoBehaviour, IDamageable
             );
             characterAnimator.CancelAnimation();
         }
+
+        audioSource.PlayOneShot(damageSource.GetHitSound());
     }
 
     /// <summary>
