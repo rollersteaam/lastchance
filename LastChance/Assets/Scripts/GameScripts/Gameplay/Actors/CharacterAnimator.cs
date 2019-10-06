@@ -33,7 +33,8 @@ public class CharacterAnimator : MonoBehaviour
     /// <returns></returns>
     public bool Attack()
     {
-        if (weaponAttacker == null) {
+        if (weaponAttacker == null)
+        {
             weaponAttacker = GetComponentInChildren<IWeaponAttacker>();
         }
 
@@ -56,8 +57,11 @@ public class CharacterAnimator : MonoBehaviour
 
         Chrono.Instance.After(0.2f, () =>
         {
-            sr.material.shader = defaultShader;
-            sr.color = defaultColor;
+            if (sr != null)
+            {
+                sr.material.shader = defaultShader;
+                sr.color = defaultColor;
+            }
 
             hitflashing = false;
         });
@@ -65,7 +69,8 @@ public class CharacterAnimator : MonoBehaviour
 
     public void CancelAnimation()
     {
-        if (weaponAttacker == null) {
+        if (weaponAttacker == null)
+        {
             weaponAttacker = GetComponentInChildren<IWeaponAttacker>();
         }
 

@@ -93,7 +93,12 @@ public class SpawnManager : MonoBehaviour
                 spawnedEnemies.Remove(gameObj);
                 concurrentEnemies--;
             };
+            var evo = gameObj.GetComponent<EvolvingBody>();
             spawnedEnemies.Add(gameObj);
+            
+            Chrono.Instance.After(0.1f, () => {
+                evo.Evolve(player.evolutionProperties.CurrentEvolution.type);
+            });
         });
 
         concurrentEnemies++;

@@ -75,6 +75,10 @@ public class EvolvingBody : MonoBehaviour
             Difficulty.Instance.GetSpeedMult(gameObject)
         );
 
+        foreach (Transform child in transform) {
+            child.localScale = transform.localScale * evolution.CalculateStatMul();
+        }
+
         character.evolutionProperties.CurrentEvolution = evolution;
     }
 
@@ -120,6 +124,8 @@ public class EvolvingBody : MonoBehaviour
             .type;
         bool invalidEvolution = targetEvolution != currentEvolution;
         if (invalidEvolution) return;
+
+        if (character.evolutionProperties.CurrentEvolution.nextEvolution == EvolutionType.None) return;
 
         Destroy(target.gameObject);
         Evolve(character.evolutionProperties.CurrentEvolution.nextEvolution);

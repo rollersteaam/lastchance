@@ -1722,26 +1722,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 170709508602396097, guid: ff12570c67452194887e37952fb2351b,
         type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 170709508602396097, guid: ff12570c67452194887e37952fb2351b,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 170709508602396097, guid: ff12570c67452194887e37952fb2351b,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 170709508602396097, guid: ff12570c67452194887e37952fb2351b,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 170709508602396097, guid: ff12570c67452194887e37952fb2351b,
-        type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
@@ -1778,26 +1758,6 @@ PrefabInstance:
     - target: {fileID: 170709508602396097, guid: ff12570c67452194887e37952fb2351b,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 170709508602396097, guid: ff12570c67452194887e37952fb2351b,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 170709508602396097, guid: ff12570c67452194887e37952fb2351b,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 170709508602396097, guid: ff12570c67452194887e37952fb2351b,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 170709508602396097, guid: ff12570c67452194887e37952fb2351b,
-        type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 170709508602396097, guid: ff12570c67452194887e37952fb2351b,

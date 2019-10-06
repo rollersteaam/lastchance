@@ -34,6 +34,7 @@ public struct Evolution
     /// The amount to multiply damage by.
     /// </summary>
     public float damageMultiplier;
+    public float speedMultiplier;
 
     /// <summary>
     /// Calculates the multiplier by which all basic stats should be
@@ -58,7 +59,9 @@ public struct Evolution
     /// </summary>
     /// <returns></returns>
     public int CalculateMaximumSpeed()
-        => Mathf.RoundToInt(260 * CalculateStatMul());
+        => Mathf.RoundToInt(260 * speedMultiplier);
+    // public int CalculateMaximumSpeed()
+    //     => Mathf.RoundToInt(260 * Mathf.Pow(CalculateStatMul(), 2));
 }
 
 [System.Serializable]

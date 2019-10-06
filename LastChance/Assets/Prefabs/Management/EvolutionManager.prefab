@@ -55,19 +55,19 @@ MonoBehaviour:
     quarkEvolution:
       type: 1
       nextEvolution: 2
-      cameraZ: -25
+      cameraZ: -30
       colliderRadius: 0.936648
       sprite: {fileID: 21300000, guid: 6f12a06b210394b4ea10e15a2b440c7c, type: 3}
       mass: 1
       damageMultiplier: 1
     particleEvolution:
       type: 2
-      nextEvolution: 0
-      cameraZ: -20
-      colliderRadius: 0.936648
-      sprite: {fileID: 0}
-      mass: 0
-      damageMultiplier: 1
+      nextEvolution: 9
+      cameraZ: -60
+      colliderRadius: 2.809944
+      sprite: {fileID: 21300000, guid: 1989486e2c81cfc488391d7527987ca5, type: 3}
+      mass: 2
+      damageMultiplier: 2
     atomEvolution:
       type: 3
       nextEvolution: 0
