@@ -22,6 +22,8 @@ public class PlayerControl : MonoBehaviour
     void FixedUpdate()
     {
         if (!character.healthProperties.alive) return;
+        if (!ProgressionManager.Instance.gameStarted) return;
+        if (ProgressionManager.Instance.gameOver) return;
 
         ProcessMovementInput();
         ProcessRotationInput();

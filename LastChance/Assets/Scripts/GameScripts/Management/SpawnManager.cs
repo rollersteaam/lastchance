@@ -65,6 +65,8 @@ public class SpawnManager : MonoBehaviour
     /// </summary>
     void Update()
     {
+        if (!ProgressionManager.Instance.gameStarted) return;
+
         if (concurrentEnemies < maxConcurrentEnemies)
         {
             SpawnEnemy();

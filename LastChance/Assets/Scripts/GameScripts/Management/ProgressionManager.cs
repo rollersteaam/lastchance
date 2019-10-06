@@ -10,6 +10,7 @@ public class ProgressionManager : Singleton<ProgressionManager>
 {
     public static event System.EventHandler OnWin;
     public bool gameOver;
+    public bool gameStarted;
 
     public void TryAgain()
     {
@@ -21,5 +22,10 @@ public class ProgressionManager : Singleton<ProgressionManager>
         Debug.Log("HELLLLLLO?");
         gameOver = true;
         OnWin?.Invoke(this, System.EventArgs.Empty);
+    }
+
+    public void Begin()
+    {
+        gameStarted = true;
     }
 }
