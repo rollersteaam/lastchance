@@ -52,7 +52,7 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 18b804a6abfaf75418a6f2c32b66d15c, type: 3}
       mass: 0.5
       damageMultiplier: 0.5
-      speedMultiplier: 1
+      speedMultiplier: 0.6
     quarkEvolution:
       type: 1
       nextEvolution: 2
@@ -70,7 +70,7 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 1989486e2c81cfc488391d7527987ca5, type: 3}
       mass: 2
       damageMultiplier: 2
-      speedMultiplier: 2
+      speedMultiplier: 9
     atomEvolution:
       type: 3
       nextEvolution: 0

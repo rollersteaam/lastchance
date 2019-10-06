@@ -107,7 +107,7 @@ MonoBehaviour:
   movementProperties:
     speed: 300
   evolutionProperties:
-    initialEvolution: 0
+    initialEvolution: 2
   combatProperties:
     weapon: {fileID: 0}
 --- !u!114 &2707931619798568327
