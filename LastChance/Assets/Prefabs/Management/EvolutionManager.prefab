@@ -47,7 +47,7 @@ MonoBehaviour:
     forceEvolution:
       type: 0
       nextEvolution: 1
-      cameraZ: -15
+      cameraZ: -18
       colliderRadius: 0.468324
       sprite: {fileID: 21300000, guid: 18b804a6abfaf75418a6f2c32b66d15c, type: 3}
       mass: 0.5
@@ -55,7 +55,7 @@ MonoBehaviour:
     quarkEvolution:
       type: 1
       nextEvolution: 2
-      cameraZ: -23
+      cameraZ: -25
       colliderRadius: 0.936648
       sprite: {fileID: 21300000, guid: 6f12a06b210394b4ea10e15a2b440c7c, type: 3}
       mass: 1

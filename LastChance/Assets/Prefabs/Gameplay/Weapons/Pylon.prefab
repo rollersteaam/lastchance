@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3696860077897655745}
   - component: {fileID: 3696860077897655751}
   - component: {fileID: 3696860077897655750}
+  - component: {fileID: 5371952389968763810}
   m_Layer: 0
   m_Name: Pylon
   m_TagString: Untagged
@@ -96,6 +97,25 @@ MonoBehaviour:
   projectile: {fileID: 5983995306382353609, guid: f84378d6abfc991409b0919f71300a6c,
     type: 3}
   attackDamage: 50
-  attackDelay: 1
+  attackDelay: 0.1
   attackPermanence: 2
   attackDistanceRange: 12
+--- !u!95 &5371952389968763810
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3696860077897655744}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3400936e3ee3f514f9888105d7e0818b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

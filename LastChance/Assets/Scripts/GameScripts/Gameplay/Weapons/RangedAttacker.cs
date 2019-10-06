@@ -15,10 +15,12 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
     bool canAttack = true;
     List<GameObject> projectiles = new List<GameObject>();
     Transform dynamicObjects;
+    Animator animator;
 
     void Start()
     {
         dynamicObjects = GameObject.FindWithTag("DynamicObjects").transform;
+        animator = GetComponent<Animator>();
     }
 
     public bool Attack()
@@ -26,6 +28,16 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
         if (!canAttack)
             return false;
 
+        animator.Play("Anticipation");
+
+        // Stop attack so anticipation can fire event for FireProjectile()
+        canAttack = false;
+
+        return true;
+    }
+
+    public void FireProjectile()
+    {
         var proj = Instantiate(
             projectile,
             transform.position,
@@ -35,9 +47,7 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
 
         RegisterProjectileLifetime(proj);
         RegisterAttackTrigger(proj);
-        ApplyAttackDelay();
-
-        return true;
+        FinishAttack();
     }
 
     public bool InRange(float targetDistance)
@@ -45,7 +55,13 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
 
     public void Cancel()
     {
+        FinishAttack();        
+    }
+
+    void FinishAttack()
+    {
         ApplyAttackDelay();
+        animator.Play("Stance");
     }
 
     void RegisterProjectileLifetime(GameObject proj)
@@ -61,7 +77,8 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
     void RegisterAttackTrigger(GameObject proj)
     {
         var at = proj.GetComponent<AttackTrigger>();
-        at.OnAttackHit += (o, e) => {
+        at.OnAttackHit += (o, e) =>
+        {
             e.Damageable.Damage(transform.parent.gameObject, attackDamage);
         };
     }
