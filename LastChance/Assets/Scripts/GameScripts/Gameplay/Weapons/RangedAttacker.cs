@@ -40,6 +40,14 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
         return true;
     }
 
+    public bool InRange(float targetDistance)
+        => targetDistance < attackDistanceRange;
+
+    public void Cancel()
+    {
+        ApplyAttackDelay();
+    }
+
     void RegisterProjectileLifetime(GameObject proj)
     {
         projectiles.Add(proj);
@@ -72,7 +80,4 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
             canAttack = true;
         });
     }
-
-    public bool InRange(float targetDistance)
-        => targetDistance < attackDistanceRange;
 }

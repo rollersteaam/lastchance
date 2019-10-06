@@ -36,4 +36,12 @@ public class CharacterMovement : MonoBehaviour, IMoveable
             zRot - 90f
         );
     }
+
+    public void Knockback(Vector3 source, float amount)
+    {
+        Vector3 diff = transform.position - source;
+        diff.Normalize();
+
+        rb.AddForce(diff * amount);
+    }
 }

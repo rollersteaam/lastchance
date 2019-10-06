@@ -13,4 +13,5 @@ public interface IWeaponAttacker
     /// </summary>
     /// <returns></returns>
     bool InRange(float targetDistance);
+    void Cancel();
 }

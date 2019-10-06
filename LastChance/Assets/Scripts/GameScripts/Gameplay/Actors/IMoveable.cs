@@ -24,4 +24,10 @@ public interface IMoveable
     /// </summary>
     /// <param name="target"></param>
     void TurnToScreenPoint(Vector3 target);
+    /// <summary>
+    /// Knocks back the character away from the source.
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="amount"></param>
+    void Knockback(Vector3 source, float amount);
 }

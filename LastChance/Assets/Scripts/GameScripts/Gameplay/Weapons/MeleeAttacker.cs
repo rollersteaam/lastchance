@@ -38,7 +38,7 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
     {
         if (!canAttack)
             return false;
-        
+
         animator.Play("Attack", -1, 0f);
 
         ApplyAttackDelay();
@@ -46,16 +46,23 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker
         return true;
     }
 
-    void ApplyAttackDelay() {
+    public bool InRange(float targetDistance)
+        => targetDistance < weaponRange;
+
+    public void Cancel()
+    {
+        animator.Play("Stance");
+    }
+
+    void ApplyAttackDelay()
+    {
         canAttack = false;
         var delayMult = Difficulty.Instance.GetAttackDelayMult(
             transform.parent.gameObject
         );
-        Chrono.Instance.After(attackDelay * delayMult, () => {
+        Chrono.Instance.After(attackDelay * delayMult, () =>
+        {
             canAttack = true;
         });
     }
-
-    public bool InRange(float targetDistance)
-        => targetDistance < weaponRange;
 }

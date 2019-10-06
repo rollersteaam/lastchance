@@ -14,15 +14,17 @@ public class CharacterCombat : MonoBehaviour, IDamageable
     Armory armory;
     Character character;
     CharacterAnimator characterAnimator;
+    CharacterMovement characterMovement;
 
     void Start()
     {
         character = GetComponent<Character>();
         characterAnimator = GetComponent<CharacterAnimator>();
+        characterMovement = GetComponent<CharacterMovement>();
 
         armory = GameObject.FindWithTag("Armory").GetComponent<Armory>();
 
-        GetWeaponFromArmory();
+        GetWeapon();
     }
 
     /// <summary>
@@ -50,20 +52,7 @@ public class CharacterCombat : MonoBehaviour, IDamageable
         // Hitting the deceased is not very nice at all.
         if (!character.healthProperties.alive) return;
 
-        // Apply damage multipliers
-        var atkChar = attacker.GetComponent<Character>();
-        if (atkChar != null)
-        {
-            var dmgMult = atkChar
-                .evolutionProperties
-                .CurrentEvolution
-                .damageMultiplier;
-            amount = Mathf.RoundToInt(
-                amount *
-                dmgMult *
-                Difficulty.Instance.GetDamageMult(attacker)
-            );
-        }
+        amount = ApplyDamageMultipliers(attacker, amount);
 
         character.healthProperties.health -= amount;
 
@@ -72,13 +61,51 @@ public class CharacterCombat : MonoBehaviour, IDamageable
             character.healthProperties.health = 0;
             Kill();
         }
+
+        characterAnimator.HitFlash();
+
+        if (gameObject.tag != "Player")
+        {
+            characterMovement.Knockback(
+                attacker.transform.position,
+                ApplyDamageMultipliers(attacker, 3000)
+            );
+            characterAnimator.CancelAnimation();
+        }
+    }
+
+    /// <summary>
+    /// Applies damage multipliers to an input damage amount, based on
+    /// properties of the attacker's character.
+    /// </summary>
+    /// <param name="attacker"></param>
+    /// <param name="damage"></param>
+    /// <returns></returns>
+    int ApplyDamageMultipliers(GameObject attacker, int damage)
+    {
+        var atkChar = attacker.GetComponent<Character>();
+
+        if (atkChar == null) return damage;
+
+        var evoDmgMult = atkChar
+            .evolutionProperties
+            .CurrentEvolution
+            .damageMultiplier;
+
+        damage = Mathf.RoundToInt(
+            damage *
+            evoDmgMult *
+            Difficulty.Instance.GetDamageMult(attacker)
+        );
+
+        return damage;
     }
 
     /// <summary>
     /// Gets weapon from armory service if the actor wasn't already provided
     /// one.
     /// </summary>
-    void GetWeaponFromArmory()
+    void GetWeapon()
     {
         if (character.combatProperties.weapon != null) return;
 
