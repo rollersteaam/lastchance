@@ -118,14 +118,16 @@ public class EvolvingBody : MonoBehaviour
             .evolutionProperties
             .CurrentEvolution
             .type;
-        EvolutionType currentEvolution = character
+        EvolutionType nextEvolution = character
             .evolutionProperties
             .CurrentEvolution
-            .type;
-        bool invalidEvolution = targetEvolution != currentEvolution;
+            .nextEvolution;
+        bool invalidEvolution = targetEvolution != nextEvolution;
         if (invalidEvolution) return;
 
-        if (character.evolutionProperties.CurrentEvolution.nextEvolution == EvolutionType.None)
+        var type = character.evolutionProperties.CurrentEvolution.nextEvolution;
+        
+        if (library.GetEvolution(type).nextEvolution == EvolutionType.None)
         {
             Debug.Log("YOU WON");
             ProgressionManager.Instance.Win();

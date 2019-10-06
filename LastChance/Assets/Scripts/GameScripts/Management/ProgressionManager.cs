@@ -22,6 +22,8 @@ public class ProgressionManager : Singleton<ProgressionManager>
         Debug.Log("HELLLLLLO?");
         gameOver = true;
         OnWin?.Invoke(this, System.EventArgs.Empty);
+        
+        MusicManager.Instance.PlayEnding();
     }
 
     public void Begin()

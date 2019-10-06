@@ -31,7 +31,7 @@ public class SpawnableProperties
 /// <summary>
 /// Spawns enemies in the game.
 /// </summary>
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : Singleton<SpawnManager>
 {
     /// <summary>
     /// The distance before mass-based modification to spawn enemies outside
@@ -49,6 +49,9 @@ public class SpawnManager : MonoBehaviour
     Transform dynamicObjects;
     List<GameObject> spawnedEnemies = new List<GameObject>();
     Character player;
+    int deathThreshold = 10;
+    int waveDeaths;
+    bool bossRound;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -74,12 +77,35 @@ public class SpawnManager : MonoBehaviour
     }
 
     /// <summary>
+    /// How much action is going on right now
+    /// </summary>
+    /// <returns></returns>
+    public int CalculateActionValue()
+    {
+        if (bossRound)
+        {
+            return 2;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
+    /// <summary>
     /// Spawns an enemy.
     /// </summary>
     void SpawnEnemy()
     {
+        if (waveDeaths >= deathThreshold)
+        {
+            return;
+        }
+
+        if (bossRound) return;
+
         Chrono.Instance.After(UnityEngine.Random.Range(2f, 4f), () =>
-        {        
+        {
             var position = GenerateRandomPositionFromPlayer();
 
             var gameObj = Instantiate(
@@ -94,16 +120,52 @@ public class SpawnManager : MonoBehaviour
                 Destroy(gameObj, 4f);
                 spawnedEnemies.Remove(gameObj);
                 concurrentEnemies--;
+                waveDeaths++;
+                bossRound = false;
+
+                if (concurrentEnemies == 0 && waveDeaths >= deathThreshold)
+                {
+                    bossRound = true;
+                    waveDeaths = 0;
+                    SpawnBoss();
+                }
             };
             var evo = gameObj.GetComponent<EvolvingBody>();
             spawnedEnemies.Add(gameObj);
-            
-            Chrono.Instance.After(0.1f, () => {
+
+            Chrono.Instance.After(0.1f, () =>
+            {
                 evo.Evolve(player.evolutionProperties.CurrentEvolution.type);
             });
         });
 
         concurrentEnemies++;
+    }
+
+    void SpawnBoss()
+    {
+        var position = GenerateRandomPositionFromPlayer();
+
+        var gameObj = Instantiate(
+            spawnableProperties.quarkEnemy,
+            position,
+            Quaternion.identity,
+            dynamicObjects.transform
+        );
+        var combat = gameObj.GetComponent<CharacterCombat>();
+        combat.OnDeath += (o, e) =>
+        {
+            spawnedEnemies.Remove(gameObj);
+            bossRound = false;
+            waveDeaths = 0;
+        };
+        var evo = gameObj.GetComponent<EvolvingBody>();
+        spawnedEnemies.Add(gameObj);
+
+        Chrono.Instance.After(0.1f, () =>
+        {
+            evo.Evolve(player.evolutionProperties.CurrentEvolution.nextEvolution);
+        });
     }
 
     /// <summary>
