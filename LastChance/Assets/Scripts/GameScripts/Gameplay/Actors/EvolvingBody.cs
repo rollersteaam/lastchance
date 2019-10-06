@@ -31,9 +31,6 @@ public class EvolvingBody : MonoBehaviour
         col = GetComponent<CircleCollider2D>();
         rend = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-
-        // Initialise the character as their evolution.
-        Evolve(character.evolutionProperties.initialEvolution);
     }
 
     /// <summary>

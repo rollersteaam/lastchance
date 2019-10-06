@@ -65,7 +65,7 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker, IDamageSource
     }
 
     public bool InRange(float targetDistance)
-        => targetDistance < weaponRange;
+        => targetDistance < (weaponRange * transform.localScale.x);
 
     public void Cancel()
     {

@@ -15,6 +15,7 @@ public class CharacterCombat : MonoBehaviour, IDamageable
     Character character;
     CharacterAnimator characterAnimator;
     CharacterMovement characterMovement;
+    EvolvingBody evolvingBody;
     AudioSource audioSource;
 
     void Start()
@@ -22,11 +23,17 @@ public class CharacterCombat : MonoBehaviour, IDamageable
         character = GetComponent<Character>();
         characterAnimator = GetComponent<CharacterAnimator>();
         characterMovement = GetComponent<CharacterMovement>();
+        evolvingBody = GetComponent<EvolvingBody>();
         audioSource = GetComponent<AudioSource>();
 
         armory = GameObject.FindWithTag("Armory").GetComponent<Armory>();
 
         GetWeapon();
+
+        if (tag == "Player")
+        {
+            evolvingBody.Evolve(character.evolutionProperties.initialEvolution);
+        }
     }
 
     /// <summary>
