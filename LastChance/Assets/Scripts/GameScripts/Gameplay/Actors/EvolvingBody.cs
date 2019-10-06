@@ -126,7 +126,7 @@ public class EvolvingBody : MonoBehaviour
         if (invalidEvolution) return;
 
         var type = character.evolutionProperties.CurrentEvolution.nextEvolution;
-        
+
         if (library.GetEvolution(type).nextEvolution == EvolutionType.None)
         {
             Debug.Log("YOU WON");
@@ -135,6 +135,7 @@ public class EvolvingBody : MonoBehaviour
         }
 
         Destroy(target.gameObject);
+        GetComponent<CharacterCombat>().ChooseNewWeapon();
         Evolve(character.evolutionProperties.CurrentEvolution.nextEvolution);
     }
 }

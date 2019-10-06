@@ -60,5 +60,6 @@ public class MusicManager : Singleton<MusicManager>
     public void PlayEnding()
     {
         Play(ending);
+        audioSource.loop = false;
     }
 }

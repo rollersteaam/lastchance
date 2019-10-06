@@ -120,10 +120,19 @@ public class CharacterCombat : MonoBehaviour, IDamageable
     {
         if (character.combatProperties.weapon != null) return;
 
+        ChooseNewWeapon();
+    }
+
+    public void ChooseNewWeapon()
+    {
+        if (character.combatProperties.weapon != null) {
+            Destroy(character.combatProperties.weapon);
+        }
+
         character.combatProperties.weapon = Instantiate(
             armory.weapons.Choose(),
             transform.position,
-            Quaternion.identity,
+            transform.rotation,
             transform
         );
         character.combatProperties.weapon.transform.localScale = transform.localScale;

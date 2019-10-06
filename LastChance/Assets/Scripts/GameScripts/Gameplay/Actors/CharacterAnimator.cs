@@ -33,12 +33,12 @@ public class CharacterAnimator : MonoBehaviour
     /// <returns></returns>
     public bool Attack()
     {
-        if (weaponAttacker == null)
-        {
-            weaponAttacker = GetComponentInChildren<IWeaponAttacker>();
-        }
+        // if (weaponAttacker == null)
+        // {
+        //     weaponAttacker = ;
+        // }
 
-        weaponAttacker.Attack();
+        GetComponentInChildren<IWeaponAttacker>().Attack();
         return true;
     }
 
@@ -69,11 +69,12 @@ public class CharacterAnimator : MonoBehaviour
 
     public void CancelAnimation()
     {
-        if (weaponAttacker == null)
-        {
-            weaponAttacker = GetComponentInChildren<IWeaponAttacker>();
-        }
+        // if (weaponAttacker == null)
+        // {
+        //     weaponAttacker = GetComponentInChildren<IWeaponAttacker>();
+        // }
 
-        weaponAttacker.Cancel();
+        // I'm aware of how garbage this is
+        GetComponentInChildren<IWeaponAttacker>().Cancel();
     }
 }

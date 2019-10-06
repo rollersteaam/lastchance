@@ -33,6 +33,8 @@ public class SpawnableProperties
 /// </summary>
 public class SpawnManager : Singleton<SpawnManager>
 {
+    public event System.EventHandler OnBossKill;
+
     /// <summary>
     /// The distance before mass-based modification to spawn enemies outside
     /// of the player's view.
@@ -52,6 +54,9 @@ public class SpawnManager : Singleton<SpawnManager>
     int deathThreshold = 10;
     int waveDeaths;
     bool bossRound;
+    bool underlingCooldown;
+    int concurrentUnderling;
+    int underlingLimit = 20;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -74,6 +79,8 @@ public class SpawnManager : Singleton<SpawnManager>
         {
             SpawnEnemy();
         }
+
+        SpawnUnderlings();
     }
 
     /// <summary>
@@ -90,6 +97,53 @@ public class SpawnManager : Singleton<SpawnManager>
         {
             return 1;
         }
+    }
+
+    void SpawnUnderlings()
+    {
+        if (underlingCooldown) return;
+        if (concurrentUnderling >= underlingLimit) return;
+        if (player.evolutionProperties.CurrentEvolution.type == EvolutionType.Force) return;
+
+        underlingCooldown = true;
+
+        var position = GenerateRandomPositionFromPlayer();
+
+        var gameObj = Instantiate(
+            spawnableProperties.quarkEnemy,
+            position,
+            Quaternion.identity,
+            dynamicObjects.transform
+        );
+        var combat = gameObj.GetComponent<CharacterCombat>();
+        combat.OnDeath += (o, e) =>
+        {
+            Destroy(gameObj, 4f);
+            concurrentUnderling--;
+        };
+        var evo = gameObj.GetComponent<EvolvingBody>();
+        spawnedEnemies.Add(gameObj);
+
+        Chrono.Instance.After(0.1f, () =>
+        {
+            var playerType = player.evolutionProperties.CurrentEvolution.type;
+
+            if (playerType == EvolutionType.Quark)
+            {
+                evo.Evolve(EvolutionType.Force);
+            }
+            else if (playerType == EvolutionType.Particle)
+            {
+                evo.Evolve(EvolutionType.Quark);
+            }
+        });
+
+        concurrentUnderling++;
+
+        Chrono.Instance.After(UnityEngine.Random.Range(1f, 7f), () =>
+        {
+            underlingCooldown = false;
+        });
     }
 
     /// <summary>
@@ -158,6 +212,8 @@ public class SpawnManager : Singleton<SpawnManager>
             spawnedEnemies.Remove(gameObj);
             bossRound = false;
             waveDeaths = 0;
+            
+            OnBossKill?.Invoke(this, System.EventArgs.Empty);
         };
         var evo = gameObj.GetComponent<EvolvingBody>();
         spawnedEnemies.Add(gameObj);
