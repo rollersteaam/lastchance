@@ -36,7 +36,7 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
             return false;
 
         animator.Play("Anticipation");
-        audioSource.PlayOneShot(anticipationSound, 2 + 1 * character.evolutionProperties.CurrentEvolution.CalculateStatMul());
+        audioSource.PlayOneShot(anticipationSound, 4f + 1 * character.evolutionProperties.CurrentEvolution.CalculateStatMul());
 
         // Stop attack so anticipation can fire event for FireProjectile()
         canAttack = false;
