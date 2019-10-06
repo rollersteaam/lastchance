@@ -22,7 +22,7 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
 
     void Start()
     {
-        dynamicObjects = GameObject.FindWithTag("DynamicObjects").transform;
+        dynamicObjects = ReferenceManager.Instance.dynamicObjects.transform;
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         var proj = projectile.GetComponent<Bullet>();

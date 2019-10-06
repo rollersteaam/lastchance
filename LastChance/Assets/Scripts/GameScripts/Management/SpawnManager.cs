@@ -64,8 +64,8 @@ public class SpawnManager : Singleton<SpawnManager>
     /// </summary>
     void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<Character>();
-        dynamicObjects = GameObject.FindWithTag("DynamicObjects").transform;
+        player = ReferenceManager.Instance.player.GetComponent<Character>();
+        dynamicObjects = ReferenceManager.Instance.dynamicObjects.transform;
     }
 
     /// <summary>

@@ -19,18 +19,21 @@ public class EnemyControl : MonoBehaviour
     IWeaponAttacker weaponAttacker;
     bool weaponAttackerHotloadAttempted;
 
-    void Start() {
-        player = GameObject.FindWithTag("Player").GetComponent<Character>();
+    void Start()
+    {
+        player = ReferenceManager.Instance.player.GetComponent<Character>();
         character = GetComponent<Character>();
         combat = GetComponent<CharacterCombat>();
         moveable = GetComponent<IMoveable>();
         weaponAttacker = GetComponentInChildren<IWeaponAttacker>();
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         if (!character.healthProperties.alive) return;
 
-        if (!weaponAttackerHotloadAttempted && weaponAttacker == null) {
+        if (!weaponAttackerHotloadAttempted && weaponAttacker == null)
+        {
             weaponAttacker = GetComponentInChildren<IWeaponAttacker>();
             weaponAttackerHotloadAttempted = true;
         }
@@ -42,7 +45,8 @@ public class EnemyControl : MonoBehaviour
     /// Evaluates the current position of the enemy to decide whether to
     /// attack or not.
     /// </summary>
-    void EvaluatePlayerPosition() {
+    void EvaluatePlayerPosition()
+    {
         if (!player.healthProperties.alive) return;
         if (ProgressionManager.Instance.gameOver) return;
 
@@ -53,9 +57,25 @@ public class EnemyControl : MonoBehaviour
         );
         moveable.TurnToScreenPoint(playerScreenPos);
 
-        if (weaponAttacker.InRange(difference.magnitude)) {
-            combat.Attack();
-        } else {
+        if (weaponAttacker == null)
+        {
+            weaponAttacker = GetComponentInChildren<IWeaponAttacker>();
+        }
+
+        try
+        {
+            if (weaponAttacker.InRange(difference.magnitude))
+            {
+                combat.Attack();
+            }
+            else
+            {
+                moveable.Move(difference);
+            }
+        }
+        catch (System.NullReferenceException)
+        {
+            Debug.LogWarning("It did it again");
             moveable.Move(difference);
         }
     }

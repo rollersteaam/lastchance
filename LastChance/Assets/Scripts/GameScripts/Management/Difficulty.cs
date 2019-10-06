@@ -25,5 +25,5 @@ public class Difficulty : Singleton<Difficulty>
         => IsPlayer(go) ? 1 : enemyDamageMultiplier;
 
     bool IsPlayer(GameObject go)
-        => go.tag == "Player";
+        => go == ReferenceManager.Instance.player;
 }

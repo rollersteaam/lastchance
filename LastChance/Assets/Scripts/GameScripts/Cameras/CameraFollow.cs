@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
     /// </summary>
     void Start()
     {
-        followedTransform = GameObject.FindWithTag("Player").transform;
+        followedTransform = ReferenceManager.Instance.player.transform;
     }
 
     /// <summary>

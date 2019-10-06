@@ -10,7 +10,7 @@ public class GameOverGUI : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        player = ReferenceManager.Instance.player;
         canvas = GetComponent<CanvasGroup>();
 
         CharacterCombat.OnPlayerDeath += OnPlayerDeath;

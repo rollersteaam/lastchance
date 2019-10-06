@@ -9,7 +9,7 @@ public class WinScreenGUI : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        player = ReferenceManager.Instance.player;
         canvas = GetComponent<CanvasGroup>();
 
         ProgressionManager.OnWin += Win;

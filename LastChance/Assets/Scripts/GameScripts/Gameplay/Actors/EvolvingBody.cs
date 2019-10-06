@@ -25,8 +25,7 @@ public class EvolvingBody : MonoBehaviour
     void Start()
     {
         character = GetComponent<Character>();
-        library = GameObject
-            .FindWithTag("EvolutionLibrary")
+        library = ReferenceManager.Instance.evolutionLibrary
             .GetComponent<EvolutionLibrary>();
         col = GetComponent<CircleCollider2D>();
         rend = GetComponent<SpriteRenderer>();
@@ -56,7 +55,8 @@ public class EvolvingBody : MonoBehaviour
     /// <param name="evolutionType"></param>
     public void Evolve(EvolutionType evolutionType)
     {
-        Evolution evolution = library.GetEvolution(evolutionType);
+        Evolution evolution = ReferenceManager.Instance.evolutionLibrary
+            .GetComponent<EvolutionLibrary>().GetEvolution(evolutionType);
 
         SetCameraPosition(evolution.cameraZ);
         col.radius = evolution.colliderRadius;
@@ -99,7 +99,7 @@ public class EvolvingBody : MonoBehaviour
 
     bool IsPlayer()
     {
-        return gameObject.tag == "Player";
+        return gameObject == ReferenceManager.Instance.player;
     }
 
     /// <summary>

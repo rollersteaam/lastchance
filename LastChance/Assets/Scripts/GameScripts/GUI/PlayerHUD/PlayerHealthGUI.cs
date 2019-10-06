@@ -12,9 +12,7 @@ public class PlayerHealthGUI : MonoBehaviour
 
     void Start()
     {
-        player = GameObject
-            .FindWithTag("Player")
-            .GetComponent<Character>();
+        player = ReferenceManager.Instance.player.GetComponent<Character>();
         healthMask = GetComponentInChildren<HealthMaskGUI>();
     }
 

@@ -26,14 +26,16 @@ public class CharacterCombat : MonoBehaviour, IDamageable
         evolvingBody = GetComponent<EvolvingBody>();
         audioSource = GetComponent<AudioSource>();
 
-        armory = GameObject.FindWithTag("Armory").GetComponent<Armory>();
+        armory = ReferenceManager.Instance.armory.GetComponent<Armory>();
 
-        GetWeapon();
+        Chrono.Instance.After(0.1f, () => {
+            GetWeapon();
 
-        if (tag == "Player")
-        {
-            evolvingBody.Evolve(character.evolutionProperties.initialEvolution);
-        }
+            if (gameObject == ReferenceManager.Instance.player)
+            {
+                evolvingBody.Evolve(character.evolutionProperties.initialEvolution);
+            }
+        });
     }
 
     /// <summary>
@@ -146,7 +148,7 @@ public class CharacterCombat : MonoBehaviour, IDamageable
         character.healthProperties.alive = false;
         OnDeath?.Invoke(this, EventArgs.Empty);
 
-        if (gameObject.tag == "Player")
+        if (gameObject == ReferenceManager.Instance.player)
         {
             OnPlayerDeath?.Invoke(this, EventArgs.Empty);
         }
