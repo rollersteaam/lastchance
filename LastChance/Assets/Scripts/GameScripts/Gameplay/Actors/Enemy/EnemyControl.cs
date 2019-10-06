@@ -17,6 +17,7 @@ public class EnemyControl : MonoBehaviour
     CharacterCombat combat;
     IMoveable moveable;
     IWeaponAttacker weaponAttacker;
+    bool weaponAttackerHotloadAttempted;
 
     void Start() {
         player = GameObject.FindWithTag("Player").GetComponent<Character>();
@@ -28,6 +29,11 @@ public class EnemyControl : MonoBehaviour
 
     void FixedUpdate() {
         if (!character.healthProperties.alive) return;
+
+        if (!weaponAttackerHotloadAttempted && weaponAttacker == null) {
+            weaponAttacker = GetComponentInChildren<IWeaponAttacker>();
+            weaponAttackerHotloadAttempted = true;
+        }
 
         EvaluatePlayerPosition();
     }

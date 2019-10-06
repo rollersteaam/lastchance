@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
     sword: {fileID: 3002283087650644829, guid: b02911c2d60160e4381bed2efb92c217, type: 3}
+    gun: {fileID: 1608234314009631123, guid: ecab8b8b9669a0743a0bba1b7897c921, type: 3}
