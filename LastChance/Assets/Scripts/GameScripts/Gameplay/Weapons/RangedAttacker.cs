@@ -59,7 +59,7 @@ public class RangedAttacker : MonoBehaviour, IWeaponAttacker
     }
 
     public bool InRange(float targetDistance)
-        => targetDistance < attackDistanceRange;
+        => targetDistance < (attackDistanceRange * transform.localScale.x);
 
     public void Cancel()
     {
