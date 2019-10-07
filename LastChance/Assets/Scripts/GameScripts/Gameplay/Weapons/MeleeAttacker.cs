@@ -48,7 +48,7 @@ public class MeleeAttacker : MonoBehaviour, IWeaponAttacker, IDamageSource
 
         canAttack = false;
         animator.Play("Anticipation");
-        audioSource.PlayOneShot(anticipationSound, 4f + 1 * character.GetComponent<Character>().evolutionProperties.CurrentEvolution.CalculateStatMul());
+        audioSource.PlayOneShot(anticipationSound, 10f + 1 * character.GetComponent<Character>().evolutionProperties.CurrentEvolution.CalculateStatMul());
 
         return true;
     }

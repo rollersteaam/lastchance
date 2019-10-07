@@ -84,7 +84,7 @@ public class CharacterCombat : MonoBehaviour, IDamageable
             characterAnimator.CancelAnimation();
         }
 
-        audioSource.PlayOneShot(damageSource.GetHitSound(), 4f + 1 * attacker.GetComponent<Character>().evolutionProperties.CurrentEvolution.CalculateStatMul());
+        audioSource.PlayOneShot(damageSource.GetHitSound(), 10f + 1 * attacker.GetComponent<Character>().evolutionProperties.CurrentEvolution.CalculateStatMul());
     }
 
     /// <summary>
