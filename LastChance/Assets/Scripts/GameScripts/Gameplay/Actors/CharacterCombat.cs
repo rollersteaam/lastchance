@@ -28,9 +28,9 @@ public class CharacterCombat : MonoBehaviour, IDamageable
 
         armory = ReferenceManager.Instance.armory.GetComponent<Armory>();
 
-        Chrono.Instance.After(0.1f, () => {
-            GetWeapon();
+        GetWeapon();
 
+        Chrono.Instance.After(0.1f, () => {
             if (gameObject == ReferenceManager.Instance.player)
             {
                 evolvingBody.Evolve(character.evolutionProperties.initialEvolution);
